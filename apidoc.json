@@ -1,0 +1,8 @@
+{
+  "name": "Granada",
+  "version": "0.0.1",
+  "description": "Basic structure for granada",
+  "apidoc": {
+    "title": "Granada"
+  }
+}

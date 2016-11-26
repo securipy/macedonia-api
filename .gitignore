@@ -1,0 +1,7 @@
+uploads/*.xml
+uploads/*.pcap
+vendor/*
+app/modules/*
+!app/modules/README.md
+public/modules/*
+!public/modules/README.md

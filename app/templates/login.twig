@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Granada Wifi | Login </title>
+
+    <!-- Bootstrap -->
+    <link href="{{ base_url() }}/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="{{ base_url() }}/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- Animate.css -->
+    <link href="https://colorlib.com/polygon/gentelella/css/animate.min.css" rel="stylesheet">
+
+    <!-- Custom Theme Style -->
+    <link href="{{ base_url() }}/css/custom.min.css" rel="stylesheet">
+
+    <link href="{{ base_url() }}/vendors/pnotify/dist/pnotify.css" rel="stylesheet">
+    <link href="{{ base_url() }}/vendors/pnotify/dist/pnotify.buttons.css" rel="stylesheet">
+    <link href="{{ base_url() }}/vendors/pnotify/dist/pnotify.nonblock.css" rel="stylesheet">
+
+  </head>
+
+  <body class="login">
+    <div>
+      <a class="hiddenanchor" id="signup"></a>
+      <a class="hiddenanchor" id="signin"></a>
+
+      <div class="login_wrapper">
+        <div class="animate form login_form">
+          <section class="login_content">
+            <form>
+              <h1>Login Granada</h1>
+              <div>
+                <input type="email" id="email" class="form-control" placeholder="email" required="" />
+              </div>
+              <div>
+                <input type="password" id="password" class="form-control" placeholder="Password" required="" />
+              </div>
+              <div>
+                <a class="btn btn-default submit" id="login">Log in</a>
+              </div>
+
+              <div class="clearfix"></div>
+
+              <div class="separator">
+     
+
+                <div class="clearfix"></div>
+                <br />
+
+                <div>
+                  <h1><i class="fa fa-paw"></i> Granada!</h1>
+                  <p>©2016 All Rights Reserved. Granada</p>
+                </div>
+              </div>
+            </form>
+          </section>
+        </div>
+
+      </div>
+    </div>
+    <script src="{{ base_url() }}/vendors/jquery/dist/jquery.min.js"></script>
+
+    
+    <script src="{{ base_url() }}/js/login.js"></script>
+
+    <!-- PNotify -->
+    <script src="{{ base_url() }}/vendors/pnotify/dist/pnotify.js"></script>
+    <script src="{{ base_url() }}/vendors/pnotify/dist/pnotify.buttons.js"></script>
+    <script src="{{ base_url() }}/vendors/pnotify/dist/pnotify.nonblock.js"></script>
+
+
+  </body>
+</html>

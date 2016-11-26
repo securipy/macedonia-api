@@ -1,0 +1,146 @@
+{% extends "base.twig" %} 
+
+{% block body %}
+
+
+
+ <!-- page content -->
+ <div class="right_col" role="main">
+
+  <div class="row">
+   <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+      <div class="x_title">
+        <h2>Servers</h2>
+        <ul class="nav navbar-right panel_toolbox">
+          <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+          </li>
+          <li id="add-server"><a><i class="fa fa-plus"></i></a></li>
+        </ul>
+        <div class="clearfix"></div>
+      </div>
+      <div class="x_content">
+        <table id="datatable" class="table table-striped table-bordered">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Ip/Dominio </th>
+              <th>Scripts </th>
+              <th>acciones</th>
+            </tr>
+          </thead>
+
+
+          <tbody>
+            {% if servers.response == true %}
+             {% for server in servers.result %}
+              <tr>
+                <td>{{server.name}}</td>
+                <td>{{server.ip_domain}}</td>
+                <td>{{server.scripts}}</td>
+                <td>
+                  <button type="button" class="btn btn-default edit_server" data-id="{{server.id}}">Editar</button>
+                  <button type="button" class="btn btn-danger delete_server" data-id="{{server.id}}">Delete</button>
+                </td>
+
+              </tr>
+            {% endfor %}
+          {% endif %}
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+</div>
+
+
+</div>
+<!-- /page content -->
+
+
+
+<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-hidden="true" id="add-new-server-modal">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
+        </button>
+        <h4 class="modal-title" id="myModalLabel2">New Server</h4>
+      </div>
+      <div class="modal-body">
+        <form class="form-horizontal form-label-left">
+          <div class="form-group">
+            <label class="control-label col-md-4 col-sm-3 col-xs-12" for="first-name">Server Name <span class="required">*</span>
+            </label>
+            <div class="col-md-8 col-sm-6 col-xs-12">
+              <input id="server-name" required="required" class="form-control col-md-7 col-xs-12" type="text">
+            </div>
+          </div> 
+
+          <div class="form-group">
+            <label class="control-label col-md-4 col-sm-3 col-xs-12" for="first-name">Ip/Domain<span class="required">*</span>
+            </label>
+            <div class="col-md-8 col-sm-6 col-xs-12">
+              <input id="server-ip-domain" required="required" class="form-control col-md-7 col-xs-12" type="text">
+            </div>
+          </div>  
+          <div class="form-group">
+            <br>
+            Scripts:
+            <div id="scripts">
+
+            </div> 
+
+            <br>
+            <div id="keys"></div>
+          </div>
+
+
+        </form>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" id="save-server">Save</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+<div class="modal modal-danger fade" id="myModal_delete_server" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Delete Server</h4>
+      </div>
+
+      <div class="modal-body">
+        Are you sure you want to delete this server? You can not send more jobs.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-info pull-left" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-danger" id="delete_server">Delete</button>
+      </div>
+    </div>
+
+  </div>
+</div><!-- /.modal -->
+
+
+
+
+{% endblock %}
+
+
+{% block javascript %}
+ {{ parent() }}
+<script src="{{ base_url() }}/js/Bootstrap-confirmation/bootstrap-confirmation.min.js"></script>
+<script src="{{ base_url() }}/js/servers.js"></script>
+
+{% endblock %}
