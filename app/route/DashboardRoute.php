@@ -17,7 +17,7 @@ $this->get('', function ($request, $response, $args) {
    $audits = $this->controller->audit->getAuditsByUserId($id);
     //var_dump($audits);
    if($type_petition == "html"){
-    return $this->view->render($response, 'dashboard.twig',[
+    return $this->view->render($response, 'templates/dashboard.twig',[
         'audits' => $audits
       ]);
 

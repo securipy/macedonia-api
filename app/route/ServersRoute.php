@@ -16,7 +16,7 @@ $app->group('/server/', function () {
     $servers = $this->controller->server->getServerByIdUser($id);
     
     if($type_petition == "html"){
-      return $this->view->render($response, 'listservers.twig',[
+      return $this->view->render($response, 'templates/listservers.twig',[
         'servers' => $servers
         ]);
     }else{

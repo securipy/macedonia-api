@@ -62,7 +62,7 @@ $app->group('/auth/', function () {
     });
 
     $this->get('login', function ($request, $response, $args) {
-        return $this->view->render($response, 'login.twig');
+        return $this->view->render($response, 'templates/login.twig');
     })->setName('login');
 
 
