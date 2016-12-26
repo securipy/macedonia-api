@@ -13,7 +13,7 @@ $app->group('/scripts/', function () {
     $type_petition = $request->getAttribute('type_petition');
     $scripts = $this->controller->scripts->getScripts();
     if($type_petition == "html"){
-      return $this->view->render($response, 'listscripts.twig',[
+      return $this->view->render($response, 'templates/listscripts.twig',[
         'scripts' => $scripts
       ]);
     }else{

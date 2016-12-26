@@ -5,3 +5,4 @@ app/modules/*
 !app/modules/README.md
 public/modules/*
 !public/modules/README.md
+composer.lock

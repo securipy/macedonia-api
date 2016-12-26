@@ -69,13 +69,13 @@ $container['model'] = function($c){
         'user' => new App\Model\UserModel($c->db),
         'auth' => new App\Model\AuthModel($c->db),
         'xrequest' => new App\Model\XRequestModel($c->db),
-        'wifi' => new App\Model\WifiModel($c->db),
+       // 'wifi' => new App\Model\WifiModel($c->db),
         'dashboard' => new App\Model\DashboardModel($c->db),
         'audit' => new App\Model\AuditModel($c->db),
         'aws' => new App\Model\AwsModel($c->db),
         'server' => new App\Model\ServerModel($c->db),
         'scripts' => new App\Model\ScriptsModel($c->db),
-        'devices' => new App\Model\DevicesModel($c->db),
+      //  'devices' => new App\Model\DevicesModel($c->db),
     ];
 
     $basePathModules = __DIR__ . '/../app/';
@@ -103,14 +103,14 @@ $container['controller'] = function($c){
     $base = (object)[
         'user' => new App\Controller\UserController($c->model->user),
         'auth' => new App\Controller\AuthController($c->model->auth),
-        'wifi' => new App\Controller\WifiController($c->model->wifi),
+       // 'wifi' => new App\Controller\WifiController($c->model->wifi),
         'xrequest' => new App\Controller\XRequestController($c->model->xrequest),
         'dashboard' => new App\Controller\DashboardController($c->model->dashboard),
         'audit' => new App\Controller\AuditController($c->model->audit),
         'aws' => new App\Controller\AwsController($c->model->aws),
         'server' => new App\Controller\ServerController($c->model->server,$c->db),
         'scripts' => new App\Controller\ScriptsController($c->model->scripts),
-        'devices' => new App\Controller\DevicesController($c->model->devices,$c->db),
+      //  'devices' => new App\Controller\DevicesController($c->model->devices,$c->db),
     ];
 
     $basePathModules = __DIR__ . '/../app/';
