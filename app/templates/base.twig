@@ -68,11 +68,13 @@
                 </ul>
                   
                 <ul id="menu-audit" {% if ga_menu == False %} style="display:none"  {% endif %} class="nav side-menu">
-                  <li><a href="/device/list"><i class="fa fa-desktop"></i> Devices </a></li>    
-                  <li><a href="/wifi/list"><i class="fa fa-wifi"></i> Wi-Fi </a></li>
                   <li><a href="/aws/instances"><i class="fa fa-amazon" aria-hidden="true"></i> AWS </a></li>
                   <li><a href="/server/list"><i class="fa fa-server" aria-hidden="true"></i> Servers </a></li>
-                  <li><a href="/scripts/list"><i class="fa fa-file-code-o" aria-hidden="true"></i> Scripts </a></li>
+                  <li><a href="/scripts/list"><i class="fa fa-file-code-o" aria-hidden="true"></i> Scripts </a>
+                  </li>
+                  {% for x in menu_element %}
+                    <li><a href="{{x.view}}"><i class="{{x.icon}}" aria-hidden="true"></i>{{x.text}}</a></li>
+                  {% endfor %}
                 </ul>
                 
               </div>
