@@ -12,7 +12,32 @@ $container['view'] = function ($c) {
     $view->addExtension(new Slim\Views\TwigExtension($c['router'], $basePath));
     $view->addExtension(new Twig_Extension_Debug());
 
-  if(isset($_COOKIE['audit']) && !empty($_COOKIE['audit'])){
+    if(isset($_COOKIE['audit']) && !empty($_COOKIE['audit'])){
+
+    $basePathModules = __DIR__ . '/../app/';
+
+    $path = $basePathModules.'modules';
+    $results = scandir($path);
+    $menu = array();
+    $content_xml = "";
+
+    foreach ($results as $result) {
+        if ($result === '.' or $result === '..') continue;
+            if(file_exists($path . '/' . $result.'/menu.xml')){
+                if($d = fopen($path . '/' . $result.'/menu.xml', "r")){
+                    while ($aux= fgets($d, 1024)){
+                        $content_xml .= $aux;
+                    }
+                    $xml = simplexml_load_string($content_xml);
+                    for($i=0; $i<count($xml->options); $i++){
+                        array_push($menu, array('text'=>$xml->options[$i]->text[0],'view'=>$xml->options[$i]->view[0],'icon'=>$xml->options[$i]->icon[0]));
+                    }
+                    fclose($d);
+                }
+            }
+    }
+        $view->getEnvironment()->addGlobal('menu_element',$menu);
+
         $view->getEnvironment()->addGlobal('ga_menu', True);
     }else{
         $view->getEnvironment()->addGlobal('ga_menu', False);    
@@ -69,13 +94,11 @@ $container['model'] = function($c){
         'user' => new App\Model\UserModel($c->db),
         'auth' => new App\Model\AuthModel($c->db),
         'xrequest' => new App\Model\XRequestModel($c->db),
-       // 'wifi' => new App\Model\WifiModel($c->db),
         'dashboard' => new App\Model\DashboardModel($c->db),
         'audit' => new App\Model\AuditModel($c->db),
         'aws' => new App\Model\AwsModel($c->db),
         'server' => new App\Model\ServerModel($c->db),
         'scripts' => new App\Model\ScriptsModel($c->db),
-      //  'devices' => new App\Model\DevicesModel($c->db),
     ];
 
     $basePathModules = __DIR__ . '/../app/';
@@ -103,14 +126,12 @@ $container['controller'] = function($c){
     $base = (object)[
         'user' => new App\Controller\UserController($c->model->user),
         'auth' => new App\Controller\AuthController($c->model->auth),
-       // 'wifi' => new App\Controller\WifiController($c->model->wifi),
         'xrequest' => new App\Controller\XRequestController($c->model->xrequest),
         'dashboard' => new App\Controller\DashboardController($c->model->dashboard),
         'audit' => new App\Controller\AuditController($c->model->audit),
         'aws' => new App\Controller\AwsController($c->model->aws),
         'server' => new App\Controller\ServerController($c->model->server,$c->db),
         'scripts' => new App\Controller\ScriptsController($c->model->scripts),
-      //  'devices' => new App\Controller\DevicesController($c->model->devices,$c->db),
     ];
 
     $basePathModules = __DIR__ . '/../app/';
@@ -120,9 +141,9 @@ $container['controller'] = function($c){
 
     foreach ($results as $result) {
         if ($result === '.' or $result === '..') continue;
-        if(file_exists($path . '/' . $result.'/'.ucfirst($result)."Model.php")){
-            $model = "App\Controller\\".ucfirst($result)."Controller";
-            $base->$result = new $model($c->model->$result,$c->db);
+        if(file_exists($path . '/' . $result.'/'.ucfirst($result)."Controller.php")){
+            $controller = "App\Controller\\".ucfirst($result)."Controller";
+            $base->$result = new $controller($c->model->$result,$c->db);
         }
     }
 
