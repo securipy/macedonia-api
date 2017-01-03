@@ -28,10 +28,13 @@ class AuthController
 						'name' => $resultLogin->name,
 						'group' => $resultLogin->user_group,
 						]);
-
-					$this->response->result = $token;
-
-					return $this->response->SetResponse(true);
+					$set_token = $this->model->setToken($token,$resultLogin->id);
+					if($set_token->response == True){
+						$this->response->result = $token;
+						return $this->response->SetResponse(true,"Login correcto");
+					}else{
+						return $this->response->SetResponse(false, "Error al generar el login");
+					}
 				} else{
 					return $this->response->SetResponse(false, "Credenciales no válidas");
 				}

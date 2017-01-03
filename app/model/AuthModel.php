@@ -31,4 +31,19 @@ class AuthModel
         }
     }
 
+    public function setToken($token,$id_user)
+    {
+       $st = $this->db->prepare("INSERT INTO users_login (id_user,token) VALUES (:id_user,:token)");
+
+        $st->bindParam(':id_user',$id_user);
+        $st->bindParam(':token',$token);
+
+        if($st->execute()){
+            return $this->response->SetResponse(true,'Credenciales de login guardadas');
+        }else{
+            return $this->response->SetResponse(false,'Error al guardar credenciales del login');
+        }
+
+    }
+
 }
