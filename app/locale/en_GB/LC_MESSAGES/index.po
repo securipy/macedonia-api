@@ -15,3 +15,11 @@ msgstr "e-mail"
 msgid "password"
 msgstr "Password"
 
+#: 
+msgid "log in"
+msgstr "Log in"
+
+#: 
+msgid "log in correct"
+msgstr "Log in correct"
+
