@@ -36,10 +36,10 @@
             <form>
               <h1>Login Granada</h1>
               <div>
-                <input type="email" id="email" class="form-control" placeholder="email" required="" />
+                <input type="email" id="email" class="form-control" placeholder="{{ 'email'|trans }}" required="" />
               </div>
               <div>
-                <input type="password" id="password" class="form-control" placeholder="Password" required="" />
+                <input type="password" id="password" class="form-control" placeholder="{% trans %}password{% endtrans %}" required="" />
               </div>
               <div>
                 <a class="btn btn-default submit" id="login">Log in</a>

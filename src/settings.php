@@ -13,6 +13,11 @@ return [
             'name' => 'slim-app',
             'path' => __DIR__ . '/../logs/app.log',
         ],
+
+        'languages' => [
+            'es' => 'es_ES.UTF-8',
+            'en' => 'en_GB.UTF-8',
+        ],
         
         // Configuración de mi APP
         'app_token_name'   => 'GRANADA-TOKEN',

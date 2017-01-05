@@ -20,6 +20,7 @@
         "php": ">=5.5.0",
         "slim/slim": "~3.0",
         "slim/twig-view": "^2.0",
+        "twig/extensions":"*",
         "monolog/monolog": "^1.17",
         "firebase/php-jwt": "^3.0",
         "phpmailer/phpmailer": "~5.2",
@@ -29,6 +30,5 @@
         "doctrine/cache":"*",
         "akrabat/rka-ip-address-middleware":"*",
         "leth/ip-address":"*"
-
     }
 }

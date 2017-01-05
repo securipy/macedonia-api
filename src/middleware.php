@@ -9,3 +9,6 @@
 $app->add(new RKA\Middleware\IpAddress());
 //Descomentar cuando se acabe de definir el middleware
 $app->add(new \App\Middleware\TypePetitionMiddleware($app));
+
+
+$app->add(new \App\Middleware\LanguageMiddleware($app));

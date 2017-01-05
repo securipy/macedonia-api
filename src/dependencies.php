@@ -8,9 +8,12 @@ $container['view'] = function ($c) {
             'debug' => true
         ]);
 
+
     $basePath = rtrim(str_ireplace('index.php', '', $c['request']->getUri()->getBasePath()), '/');
     $view->addExtension(new Slim\Views\TwigExtension($c['router'], $basePath));
     $view->addExtension(new Twig_Extension_Debug());
+    $view->addExtension(new Twig_Extensions_Extension_I18n());
+
 
     if(isset($_COOKIE['audit']) && !empty($_COOKIE['audit'])){
 
