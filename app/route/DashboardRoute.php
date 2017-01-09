@@ -18,7 +18,8 @@ $this->get('', function ($request, $response, $args) {
     //var_dump($audits);
    if($type_petition == "html"){
     return $this->view->render($response, 'templates/dashboard.twig',[
-        'audits' => $audits
+        'audits' => $audits,
+        'locale' => $request->getAttribute('locale'),
       ]);
 
     }else{

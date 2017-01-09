@@ -73,7 +73,7 @@
                   <li><a href="/scripts/list"><i class="fa fa-file-code-o" aria-hidden="true"></i> Scripts </a>
                   </li>
                   {% for x in menu_element %}
-                    <li><a href="{{x.view}}"><i class="{{x.icon}}" aria-hidden="true"></i>{{x.text}}</a></li>
+                    <li><a href="{{x.view}}"><i class="{{x.icon}}" aria-hidden="true"></i>{{x.text|trans}}</a></li>
                   {% endfor %}
                 </ul>
                 
@@ -113,7 +113,9 @@
         <!-- /footer content -->
       </div>
     </div>
-
+    {% block javascript %}
+    <script type="text/javascript">
+    </script>
     <!-- jQuery -->
     <script src="{{ base_url() }}/vendors/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap -->
@@ -121,30 +123,30 @@
     <!-- FastClick -->
     <script src="{{ base_url() }}/vendors/fastclick/lib/fastclick.js"></script>
     <!-- NProgress -->
-    <script src="{{ base_url() }}/vendors/nprogress/nprogress.js"></script>
+   <!-- <script src="{{ base_url() }}/vendors/nprogress/nprogress.js"></script> -->
     <!-- Chart.js -->
-    <script src="{{ base_url() }}/vendors/Chart.js/dist/Chart.min.js"></script>
+  <!--  <script src="{{ base_url() }}/vendors/Chart.js/dist/Chart.min.js"></script> -->
     <!-- gauge.js -->
-    <script src="{{ base_url() }}/vendors/bernii/gauge.js/dist/gauge.min.js"></script>
+  <!--  <script src="{{ base_url() }}/vendors/bernii/gauge.js/dist/gauge.min.js"></script> -->
     <!-- bootstrap-progressbar -->
-    <script src="{{ base_url() }}/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+   <!-- <script src="{{ base_url() }}/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script> -->
     <!-- iCheck -->
-    <script src="{{ base_url() }}/vendors/iCheck/icheck.min.js"></script>
+   <!-- <script src="{{ base_url() }}/vendors/iCheck/icheck.min.js"></script> -->
     <!-- Skycons -->
-    <script src="{{ base_url() }}/vendors/skycons/skycons.js"></script>
+   <!-- <script src="{{ base_url() }}/vendors/skycons/skycons.js"></script> -->
     <!-- Flot -->
-    <script src="{{ base_url() }}/vendors/Flot/jquery.flot.js"></script>
+  <!--  <script src="{{ base_url() }}/vendors/Flot/jquery.flot.js"></script>
     <script src="{{ base_url() }}/vendors/Flot/jquery.flot.pie.js"></script>
     <script src="{{ base_url() }}/vendors/Flot/jquery.flot.time.js"></script>
     <script src="{{ base_url() }}/vendors/Flot/jquery.flot.stack.js"></script>
-    <script src="{{ base_url() }}/vendors/Flot/jquery.flot.resize.js"></script>
+    <script src="{{ base_url() }}/vendors/Flot/jquery.flot.resize.js"></script> -->
     <!-- Flot plugins -->
-    <script src="{{ base_url() }}/js/flot/jquery.flot.orderBars.js"></script>
+   <!-- <script src="{{ base_url() }}/js/flot/jquery.flot.orderBars.js"></script>
     <script src="{{ base_url() }}/js/flot/date.js"></script>
     <script src="{{ base_url() }}/js/flot/jquery.flot.spline.js"></script>
-    <script src="{{ base_url() }}/js/flot/curvedLines.js"></script>
+    <script src="{{ base_url() }}/js/flot/curvedLines.js"></script> -->
     <!-- jVectorMap -->
-    <script src="{{ base_url() }}/js/maps/jquery-jvectormap-2.0.3.min.js"></script>
+    <!-- <script src="{{ base_url() }}/js/maps/jquery-jvectormap-2.0.3.min.js"></script> -->
     <!-- bootstrap-daterangepicker -->
     <script src="{{ base_url() }}/js/moment/moment.min.js"></script>
     <script src="{{ base_url() }}/js/datepicker/daterangepicker.js"></script>
@@ -169,7 +171,7 @@
 
     </script>
 
-    {% block javascript %}
+   
 
     {% endblock %}
     <!-- /gauge.js -->

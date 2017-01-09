@@ -6,6 +6,7 @@ msgstr ""
 "X-Generator: POEditor.com\n"
 "Project-Id-Version: Macedonia\n"
 "Language: en\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: 
 msgid "email"
@@ -22,4 +23,74 @@ msgstr "Log in"
 #: 
 msgid "log in correct"
 msgstr "Log in correct"
+
+#: 
+msgid "invalid credentials"
+msgstr "Invalid credentials"
+
+#: 
+msgid "delete"
+msgstr "Delete"
+
+#: 
+msgid "add"
+msgstr "Add"
+
+#: 
+msgid "select"
+msgstr "Select"
+
+#: 
+msgid "server"
+msgid_plural "servers"
+msgstr[0] "Server"
+msgstr[1] "Servers"
+
+#: 
+msgid "name"
+msgstr "Name"
+
+#: 
+msgid "date"
+msgstr "Date"
+
+#: 
+msgid "actions"
+msgstr "Actions"
+
+#: 
+msgid "new audit"
+msgstr "New Audit"
+
+#: 
+msgid "save"
+msgstr "Save"
+
+#: 
+msgid "close"
+msgstr "Close"
+
+#: 
+msgid "audit name"
+msgstr "Audit Name"
+
+#: 
+msgid "select audit"
+msgstr "Select Audit"
+
+#: 
+msgid "new audit create"
+msgstr "New audit create"
+
+#: 
+msgid "error creating audit"
+msgstr "Error creating audit"
+
+#: 
+msgid "audit data"
+msgstr "Audit data"
+
+#: 
+msgid "error get audit"
+msgstr "Error get audit"
 

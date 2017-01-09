@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Lib\Response,
+App\Lib\Language,
 App\Lib\Auth;
 
 
@@ -31,12 +32,12 @@ class AuthController
 					$set_token = $this->model->setToken($token,$resultLogin->id);
 					if($set_token->response == True){
 						$this->response->result = $token;
-						return $this->response->SetResponse(true,"Login correcto");
+						return $this->response->SetResponse(true,Language::_f("log in correct"));
 					}else{
 						return $this->response->SetResponse(false, "Error al generar el login");
 					}
 				} else{
-					return $this->response->SetResponse(false, "Credenciales no válidas");
+					return $this->response->SetResponse(false, _("invalid credentials"));
 				}
 			}else{
 				return $this->response->SetResponse(false, "Activa tu cuenta");

@@ -20,7 +20,7 @@ $(document).ready(function(){
 		}
 
 		$.ajax({
-			url: "/auth/login",
+			url: "/es/auth/login",
 			type: "post",
 			data:datos,
 			dataType: "json",
@@ -31,7 +31,7 @@ $(document).ready(function(){
     				var expires = "expires="+ d.toUTCString();
 					document.cookie = "token="+data.result+";" + expires + ";path=/";;
 					new PNotify({
-						title: 'Login correcto',
+						title: 'Login',
 						text: data.message,
 						type: 'success',
 						styling: 'bootstrap3'
@@ -40,7 +40,7 @@ $(document).ready(function(){
 
 				}else{
 					new PNotify({
-						title: 'Login no valido',
+						title: 'Login',
 						text: data.message,
 						styling: 'bootstrap3'
 					});

@@ -1,15 +1,22 @@
 $(document).ready(function(){
 
-	$('#datatable').on("click", ".select_audit", function() {
+
+
+	$('#dashboard_datatable').dataTable({
+		"language": {
+			"url": "../locale/"+language_site+"/datatable.json",
+        }
+	});
+
+
+
+	$('#dashboard_datatable').on("click", ".select_audit", function() {
 		document.cookie = "audit="+$(this).data("id")+";path=/";
 		$("#menu-audit").show();
 	});
 
-	$('#datatable').on("click", ".delete_audit", function() {
-		//alert($(this).data("id"));
-
-
-
+	$('#dashboard_datatable').on("click", ".delete_audit", function() {
+		
 	});
 
 
@@ -24,7 +31,7 @@ $(document).ready(function(){
 		}
 
 		$.ajax({
-			url: "/audit/new",
+			url: "/"+language_site+"/audit/new",
 	        headers: {
         		'GRANADA-TOKEN':readCookie('token'),
         	},
@@ -40,11 +47,11 @@ $(document).ready(function(){
 						styling: 'bootstrap3'
 					});
 					
-					var oTable = $('#datatable').dataTable();
+					var oTable = $('#dashboard_datatable').dataTable();
 						oTable.fnAddData( [
 							data.result[0].name,
 							data.result[0].date_create,
-							'<button type="button" class="btn btn-default select_audit" data-id="'+data.result[0].id+'">Selecionar</button><button type="button" class="btn btn-danger delete_audit" data-id="'+data.result[0].id+'">eliminar</button>'] ); 
+							'<button type="button" class="btn btn-default select_audit" data-id="'+data.result[0].id+'">'+i18n.select+'</button><button type="button" class="btn btn-danger delete_audit" data-id="'+data.result[0].id+'">'+i18n.delete+'</button>'] ); 
 					$('#add_new').modal('hide');
 
 				}else{

@@ -20,8 +20,6 @@ class LanguageMiddleware
 
     public function __invoke(RequestInterface $request, ResponseInterface $response, $next)
     {
-        //error_log(var_dump(__DIR__));
-
         $uri = $request->getUri();
         $virtualPath = $uri->getPath();
         $pathChunk = explode("/",$virtualPath);
@@ -30,21 +28,37 @@ class LanguageMiddleware
             $pathChunk = array_slice($pathChunk, 2);
             $path = "/".implode("/",$pathChunk);
             $uri = $uri->withPath($path);
-            $request = $request->withUri($uri);
+            $request = $request->withUri($uri)->withAttribute('locale', $language);
             $locale = $this->language[$language];
-            $dir = __DIR__."/../locale/";
-            setlocale(LC_ALL, $locale);
-            bindtextdomain("index", $dir);
-            textdomain("index");
+            $this->getLocale("index",__DIR__."/../locale/",$locale);
+            $this->readModules($locale);
         }else{
-            $dir = __DIR__."/../locale/";
-            $locale = "en_GB.UTF-8";
-            setlocale(LC_ALL, $locale);
-            bindtextdomain("index", $dir);
-            textdomain("index");
+          $this->getLocale();
+          $this->readModules();
+          $request = $request->withAttribute('locale', 'en');
         }
         return $next($request, $response);
     }
 
+
+    private function getLocale($domain = "index",$dir=__DIR__."/../locale/",$locale = "en_GB.UTF-8")
+    {
+        setlocale(LC_ALL, $locale);
+        bindtextdomain($domain, $dir);
+        textdomain($domain);
+    }
+
+    private function readModules($locale = "en_GB.UTF-8"){
+        $path = __DIR__ . '/../modules';
+
+        $results = scandir($path);
+
+        foreach ($results as $result) {
+            if ($result === '.' or $result === '..') continue;
+            if(is_dir($path."/".$result)){
+                $this->getLocale($result,$path."/".$result."/locale/",$locale);
+            }
+        }
+    }
 
 }

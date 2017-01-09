@@ -2,7 +2,7 @@
 namespace App\Model;
 
 use App\Lib\Response,
-App\Lib\Auth;
+App\Lib\Language;
 
 class AuditModel
 {
@@ -26,9 +26,9 @@ class AuditModel
         $this->response->result = null;
         if($st->execute()){
             $this->response->result =  $this->db->lastInsertId();
-            return $this->response->SetResponse(true,"New audit created");
+            return $this->response->SetResponse(true,Language::_f("new audit create"));
         }else{
-            return $this->response->SetResponse(false,"Error creating audit");
+            return $this->response->SetResponse(false,Language::_f("error creating audit"));
         }
     }
 
@@ -46,9 +46,9 @@ class AuditModel
         $this->response->result = null;
         if($st->execute()){
             $this->response->result = $st->fetchAll();
-            return $this->response->SetResponse(true,"Audit data");
+            return $this->response->SetResponse(true,Language::_f("audit data"));
         }else{
-            return $this->response->SetResponse(false,"Error get audit");
+            return $this->response->SetResponse(false,Language::_f("error get audit"));
         }
     }
 

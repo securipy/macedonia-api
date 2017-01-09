@@ -15,6 +15,19 @@ $container['view'] = function ($c) {
     $view->addExtension(new Twig_Extensions_Extension_I18n());
 
 
+
+    $getTextdomain = new Twig_SimpleFunction('get_textdomain', function () {
+        return textdomain(NULL);
+    });
+    $setTextdomain = new Twig_SimpleFunction('set_textdomain', function ($domain) {
+        textdomain($domain);
+    });
+
+    $view->getEnvironment()->addFunction($getTextdomain);
+    $view->getEnvironment()->addFunction($setTextdomain);
+
+
+
     if(isset($_COOKIE['audit']) && !empty($_COOKIE['audit'])){
 
     $basePathModules = __DIR__ . '/../app/';

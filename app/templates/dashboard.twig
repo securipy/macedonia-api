@@ -5,12 +5,12 @@
 
  <!-- page content -->
  <div class="right_col" role="main">
-  
+  {{ set_textdomain('index') }}
   <div class="row">
    <div class="col-md-12 col-sm-12 col-xs-12">
     <div class="x_panel">
       <div class="x_title">
-        <h2>Selcciona una adituria</h2>
+        <h2>{% trans %}select audit{% endtrans %}</h2>
         <ul class="nav navbar-right panel_toolbox">
           <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
           </li>
@@ -19,26 +19,26 @@
         </ul>
         <div class="clearfix"></div>
       </div>
+      
       <div class="x_content">
-        <table id="datatable" class="table table-striped table-bordered">
+        <table id="dashboard_datatable" class="table table-striped table-bordered">
           <thead>
             <tr>
-              <th>Name</th>
-              <th>Fecha </th>
-              <th>acciones</th>
+              <th>{% trans %}name{% endtrans %}</th>
+              <th>{% trans %}date{% endtrans %} </th>
+              <th>{% trans %}actions{% endtrans %}</th>
             </tr>
           </thead>
-
-
           <tbody>
+            
             {% if audits.response == true %}
              {% for audit in audits.result%}
              <tr>
               <td>{{ audit.name }}</td>
               <td>{{ audit.date_create }}</td>
               <td>
-               <button type="button" class="btn btn-default select_audit" data-id="{{ audit.id }}">Selecionar</button>
-               <button type="button" class="btn btn-danger delete_audit" data-id="{{ audit.id }}">eliminar</button>
+               <button type="button" class="btn btn-default select_audit" data-id="{{ audit.id }}">{% trans %}select{% endtrans %}</button>
+               <button type="button" class="btn btn-danger delete_audit" data-id="{{ audit.id }}">{% trans %}delete{% endtrans %}</button>
              </td>
 
            </tr>
@@ -63,12 +63,12 @@
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
         </button>
-        <h4 class="modal-title" id="myModalLabel2">New Audit</h4>
+        <h4 class="modal-title" id="myModalLabel2">{% trans %}new audit{% endtrans %}</h4>
       </div>
       <div class="modal-body">
         <form>
           <div class="form-group">
-            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Audit Name <span class="required">*</span>
+            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">{% trans %}audit name{% endtrans %} <span class="required">*</span>
             </label>
             <div class="col-md-6 col-sm-6 col-xs-12">
               <input id="audit-name" required="required" class="form-control col-md-7 col-xs-12" type="text">
@@ -78,8 +78,8 @@
 
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" id="save-new-adit">Save changes</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">{% trans %}close{% endtrans %}</button>
+          <button type="button" class="btn btn-primary" id="save-new-adit">{% trans %}save{% endtrans %}</button>
         </div>
 
       </div>
@@ -92,7 +92,10 @@
 
 
 {% block javascript %}
- {{ parent() }}
+ <script type="text/javascript">
+ var language_site = '{{locale}}'
+ </script>
+{{ parent() }}
  <script src="{{ base_url() }}/js/dashboard.js"></script>
 
 {% endblock %}

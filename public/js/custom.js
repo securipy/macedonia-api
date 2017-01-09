@@ -289,3 +289,13 @@ function readCookie(name) {
     }
     return null;
 }
+
+var i18n;
+
+$( document ).ready(function() {    
+    if (typeof language_site !== 'undefined') {
+        $.getJSON('../locale/'+language_site+'/index.json', function(data) {         
+            i18n = data;
+        });
+    }
+});
