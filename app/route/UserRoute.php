@@ -142,6 +142,16 @@ $app->group('/user/', function () {
                    ); 
     })->add(new AuthMiddleware($this));
 
+
+    /**
+     * @api {post} /recovery/ Recovery password
+     * @apiName recovery
+     * @apiGroup user
+     *
+     * @apiParam {String} email Users unique email.
+     *
+     * @apiSuccess {String} Return if email to recovery send correctly.
+     */
    $this->post('recovery', function ($req, $res, $args) {
         $expected_fields = array('email');
 
@@ -160,6 +170,16 @@ $app->group('/user/', function () {
                      json_encode($this->controller->user->recovery($data))
                    ); 
     }); 
+
+    /**
+     * @api {post} /recovery/{token} Recovery password
+     * @apiName updaterecovery
+     * @apiGroup user
+     *
+     * @apiParam {String} Token send email before.
+     *
+     * @apiSuccess {String} Return if token is valid to recovery password.
+     */
    $this->post('updaterecovery/{token}', function ($req, $res, $args) {
 
 

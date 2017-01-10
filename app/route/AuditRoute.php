@@ -9,6 +9,18 @@ App\Middleware\AuthMiddleware;
 
 $app->group('/audit/', function () {
 
+  /**
+  * @api {post} /user Name new audit
+  * @apiHeader {String} GRANADA-TOKEN="" Token login valid
+  *
+  * @apiName new
+  * @apiGroup audit
+  *
+  * @apiParam {String} Name of the audit.
+  *
+  * 
+  */
+
   $this->post('new', function ($request, $response, $args) {
     $expected_fields = array('name');
 
@@ -35,7 +47,14 @@ $app->group('/audit/', function () {
   })->add(new AuthMiddleware($this));
 
 
-
+  /**
+  * @api {get} /list list all audit from this user
+  * @apiHeader {String} GRANADA-TOKEN="" Token login valid
+  *
+  * @apiName list
+  * @apiGroup audit
+  * 
+  */
 
   $this->get('list', function ($request, $response, $args) {
    

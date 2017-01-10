@@ -61,8 +61,43 @@ $app->group('/auth/', function () {
                    );
     });
 
+    /**
+    * @api {post} /user Name new audit
+    * @apiHeader {String} GRANADA-TOKEN="" Token login valid
+    * 
+    * @apiName new
+    * @apiGroup audit
+    *
+    * @apiParam {String} Name of the audit.
+    *
+    *     
+    */
+
+
     $this->get('login', function ($request, $response, $args) {
-        return $this->view->render($response, 'templates/login.twig');
+        if(isset($_COOKIE['token']) && !empty($_COOKIE['token'])){
+            try {
+                Auth::Check($_COOKIE['token']);
+            } catch (Exception $e) {
+                return $this->view->render($response, 'templates/login.twig');
+            }
+            return $response->withRedirect('/dashboard', 301);
+
+        }else{
+            return $this->view->render($response, 'templates/login.twig');
+        }
+
+
+        
+    });
+
+
+    $this->get('logout', function ($request, $response, $args) {
+        if(isset($_COOKIE['token'])){
+            unset($_COOKIE['token']);
+            setcookie('token', null, -1, '/');
+        }
+        return $response->withRedirect('/auth/login', 301);
     });
 
 
