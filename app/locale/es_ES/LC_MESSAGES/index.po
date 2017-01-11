@@ -94,3 +94,61 @@ msgstr "Datos de la auditoría"
 msgid "error get audit"
 msgstr "Error al obtener la auditoría"
 
+#: 
+msgid "status"
+msgstr "Estado"
+
+#: 
+msgid "instance"
+msgstr "Instancia"
+
+#: 
+msgid "start"
+msgstr "Iniciar"
+
+#: 
+msgid "stop"
+msgstr "Parar"
+
+#: 
+msgid "welcome"
+msgstr "Bienvenido"
+
+#: 
+msgid "script"
+msgid_plural "scripts"
+msgstr[0] "Script"
+msgstr[1] "Scripts"
+
+#: 
+msgid "home"
+msgstr "Inicio"
+
+#: 
+msgid "log out"
+msgstr "Desconectar"
+
+#: 
+msgid "list script"
+msgstr "Lista de scripts"
+
+#: 
+msgid "description"
+msgstr "Descripción"
+
+#: 
+msgid "download"
+msgstr "Descargar"
+
+#: 
+msgid "ip/domain"
+msgstr "Ip/Domain"
+
+#: 
+msgid "new server"
+msgstr "Nuevo servidor"
+
+#: 
+msgid "server name"
+msgstr "Nombre del servidor"
+
