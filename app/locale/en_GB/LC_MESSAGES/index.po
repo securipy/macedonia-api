@@ -94,3 +94,61 @@ msgstr "Audit data"
 msgid "error get audit"
 msgstr "Error get audit"
 
+#: 
+msgid "status"
+msgstr "Status"
+
+#: 
+msgid "instance"
+msgstr "Instance"
+
+#: 
+msgid "start"
+msgstr "Start"
+
+#: 
+msgid "stop"
+msgstr "Stop"
+
+#: 
+msgid "welcome"
+msgstr "Welcome"
+
+#: 
+msgid "script"
+msgid_plural "scripts"
+msgstr[0] "Script"
+msgstr[1] "Scripts"
+
+#: 
+msgid "home"
+msgstr "Home"
+
+#: 
+msgid "log out"
+msgstr "Log out"
+
+#: 
+msgid "list script"
+msgstr "List script"
+
+#: 
+msgid "description"
+msgstr "Description"
+
+#: 
+msgid "download"
+msgstr "Download"
+
+#: 
+msgid "ip/domain"
+msgstr "Ip/Domain"
+
+#: 
+msgid "new server"
+msgstr "New server"
+
+#: 
+msgid "server name"
+msgstr "Server name"
+
