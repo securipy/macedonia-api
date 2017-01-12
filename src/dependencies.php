@@ -15,7 +15,6 @@ $container['view'] = function ($c) {
     $view->addExtension(new Twig_Extensions_Extension_I18n());
 
 
-
     $getTextdomain = new Twig_SimpleFunction('get_textdomain', function () {
         return textdomain(NULL);
     });
