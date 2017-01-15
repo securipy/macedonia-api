@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Lib\Response,
+App\Lib\Language,
 App\Lib\Auth;
 
 class UserController
@@ -63,7 +64,7 @@ class UserController
                 return $resultRegister;
                 //TODO: Send email issues #2
             }else{
-              return $this->response->SetResponse(false, "Email ya registrado");
+              return $this->response->SetResponse(false, Language::_f("email already registered"));
             }
 
             return $this->response->SetResponse(true);

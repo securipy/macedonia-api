@@ -10,7 +10,7 @@ msgstr ""
 
 #: 
 msgid "email"
-msgstr "e-mail"
+msgstr "E-mail"
 
 #: 
 msgid "password"
@@ -151,4 +151,159 @@ msgstr "New server"
 #: 
 msgid "server name"
 msgstr "Server name"
+
+#: 
+msgid "error storing token"
+msgstr "Error storing token"
+
+#: 
+msgid "active account"
+msgstr "Active account"
+
+#: 
+msgid "login aws ec2 correct"
+msgstr "Login AWS ec2 correct"
+
+#: 
+msgid "list aws instances"
+msgstr "List AWS instances"
+
+#: 
+msgid "start aws instances"
+msgstr "Start AWS instances"
+
+#: 
+msgid "upload correct"
+msgstr "Upload correct"
+
+#: 
+msgid "nothing to upload"
+msgstr "Nothing to upload"
+
+#: 
+msgid "this not is your server"
+msgstr "This not is your server"
+
+#: 
+msgid "error closing session"
+msgstr "Error closing session"
+
+#: 
+msgid "session closed properly"
+msgstr "Session closed properly"
+
+#: 
+msgid "failed to save login credentials"
+msgstr "Failed to save login credentials"
+
+#: 
+msgid "saved login credentials"
+msgstr "Saved login credentrials"
+
+#: 
+msgid "error checking email"
+msgstr "Error checking email"
+
+#: 
+msgid "aws credentials"
+msgstr "AWS credentials"
+
+#: 
+msgid "error get aws credentials"
+msgstr "Error get AWS credentials"
+
+#: 
+msgid "check server script"
+msgstr "check server script"
+
+#: 
+msgid "error check server with script"
+msgstr "Error check server with script"
+
+#: 
+msgid "script data"
+msgstr "Script data"
+
+#: 
+msgid "error get scripts"
+msgstr "Error get scripts"
+
+#: 
+msgid "server data"
+msgstr "Server data"
+
+#: 
+msgid "error get servers"
+msgstr "Error get servers"
+
+#: 
+msgid "delete scripts server"
+msgstr "Delete scripts server"
+
+#: 
+msgid "error delete scripts server"
+msgstr "Error delete scripts server"
+
+#: 
+msgid "add script server"
+msgstr "Add script server"
+
+#: 
+msgid "error add script server"
+msgstr "Error add script server"
+
+#: 
+msgid "delete script server"
+msgstr "Delete script server"
+
+#: 
+msgid "delete add script server"
+msgstr "Delete add script server"
+
+#: 
+msgid "update server"
+msgstr "Update server"
+
+#: 
+msgid "error update server"
+msgstr "Error update server"
+
+#: 
+#, fuzzy
+msgid "delete server?"
+msgstr "Delete server?"
+
+#: 
+#, fuzzy
+msgid "error deleted server"
+msgstr "Error deleted server"
+
+#: 
+msgid "are you sure you want to delete this server? you can not send more jobs"
+msgstr "Are you sure you want to delete this server? You can not send more jobs"
+
+#: 
+msgid "user"
+msgstr "User"
+
+#: 
+msgid "edit"
+msgstr "Edit"
+
+#: 
+#, fuzzy
+msgid "deleted server"
+msgstr "Deleted server"
+
+#: 
+msgid "details"
+msgstr "Details"
+
+#: 
+msgid "start date"
+msgstr "Start date"
+
+#: 
+msgid "finish date"
+msgstr "Finish date"
 

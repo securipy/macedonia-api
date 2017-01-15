@@ -20,7 +20,7 @@ $(document).ready(function(){
 		}
 
 		$.ajax({
-			url: "/es/auth/login",
+			url: "/"+language_site+"/auth/login",
 			type: "post",
 			data:datos,
 			dataType: "json",
@@ -36,7 +36,7 @@ $(document).ready(function(){
 						type: 'success',
 						styling: 'bootstrap3'
 					});
-					window.location = "/dashboard";
+					window.location = "/"+language_site+"/dashboard";
 
 				}else{
 					new PNotify({

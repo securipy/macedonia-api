@@ -4,7 +4,7 @@ $(document).ready(function(){
 
 	infoserver = function(id_server){
 			return $.ajax({
-			url: "/server/"+id_server,
+			url: "/"+language_site+"/server/"+id_server,
 			headers: {
 				'GRANADA-TOKEN':readCookie('token'),
 			},
@@ -26,7 +26,7 @@ $(document).ready(function(){
 
 	scripts = function(){
 		 	return $.ajax({
-			url: "/scripts/list",
+			url: "/"+language_site+"/scripts/list",
 			headers: {
 				'GRANADA-TOKEN':readCookie('token'),
 			},
@@ -46,7 +46,16 @@ $(document).ready(function(){
 	}
 
 
-	$('#datatable').on("click", ".delete_server", function() {
+
+	$('#server_datatable').dataTable({
+		"language": {
+			"url": "/../locale/"+language_site+"/datatable.json",
+        }
+	});
+
+
+
+	$('#server_datatable').on("click", ".delete_server", function() {
 		id_server = $(this).data("id");
 		$("#myModal_delete_server").modal('show');
 	});
@@ -54,7 +63,7 @@ $(document).ready(function(){
 
 	$("#delete_server").click(function(){
 		$.ajax({
-			url: "/server/"+id_server,
+			url: "/"+language_site+"/server/"+id_server,
 			headers: {
 				'GRANADA-TOKEN':readCookie('token'),
 			},
@@ -69,7 +78,7 @@ $(document).ready(function(){
 						styling: 'bootstrap3'
 					});
 
-					var oTable = $('#datatable').dataTable()
+					var oTable = $('#server_datatable').dataTable()
 					var nRow = $("button[data-id="+id_server+"]").parent().parent('tr')[0];
 					oTable.fnDeleteRow( nRow );
 					$("#myModal_delete_server").modal('hide');
@@ -97,7 +106,7 @@ $(document).ready(function(){
 
 
 
-	$('#datatable').on("click", ".edit_server", function() {
+	$('#server_datatable').on("click", ".edit_server", function() {
 		id_server = $(this).data("id");
 		$.when( infoserver(id_server), scripts() ).done(function ( is, sc ) {
 			is = is[0];
@@ -141,7 +150,7 @@ $(document).ready(function(){
 		$("#keys").html("");
 		id_server = 0;
 		$.ajax({
-			url: "/scripts/list",
+			url: "/"+language_site+"/scripts/list",
 			headers: {
 				'GRANADA-TOKEN':readCookie('token'),
 			},
@@ -198,11 +207,11 @@ $(document).ready(function(){
 		}
 
 		if(id_server == 0){
-			url = "/server/new";
+			url = "/"+language_site+"/server/new";
 			type = "POST"
 
 		}else{
-			url = "/server/update/"+id_server;
+			url = "/"+language_site+"/server/update/"+id_server;
 			type = "PUT"
 		}
 
@@ -223,7 +232,7 @@ $(document).ready(function(){
 						type: 'success',
 						styling: 'bootstrap3'
 					});
-					var oTable = $('#datatable').dataTable();
+					var oTable = $('#server_datatable').dataTable();
 					if(id_server == 0){
 						$("#keys").html('<div class="alert alert-warning alert-dismissible fade in" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button><strong>COPY THE KEYs not show other time:</strong><br>Public Key:<br>'+data.result[0].public_key+'<br>Private Key:<br>'+data.result[0].private_key+' </div>');
 						oTable.fnAddData( [

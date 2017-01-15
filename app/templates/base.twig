@@ -39,7 +39,7 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Macedonia</span></a>
+              <a href="/{{locale}}/dashboard" class="site_title"><i class="fa fa-paw"></i> <span>Macedonia</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -65,16 +65,17 @@
               <div class="menu_section">
               <!--  <h3>General</h3> -->
                 <ul class="nav side-menu">
-                  <li><a href="/dashboard"><i class="fa fa-home"></i> {% trans %}home{% endtrans %} </a></li>   
+                  <li><a href="/{{locale}}/dashboard"><i class="fa fa-home"></i> {% trans %}home{% endtrans %} </a></li>   
                 </ul>
                   
                 <ul id="menu-audit" {% if ga_menu == False %} style="display:none"  {% endif %} class="nav side-menu">
-                  <li><a href="/aws/instances"><i class="fa fa-amazon" aria-hidden="true"></i> AWS </a></li>
-                  <li><a href="/server/list"><i class="fa fa-server" aria-hidden="true"></i> {% trans %}server{% endtrans %} </a></li>
-                  <li><a href="/scripts/list"><i class="fa fa-file-code-o" aria-hidden="true"></i> {% trans %}script{% endtrans %} </a>
+                  <li><a href="/{{locale}}/aws/instances"><i class="fa fa-amazon" aria-hidden="true"></i> AWS </a></li>
+                  <li><a href="/{{locale}}/server/list"><i class="fa fa-server" aria-hidden="true"></i> {% trans %}server{% endtrans %} </a></li>
+                  <li><a href="/{{locale}}/scripts/list"><i class="fa fa-file-code-o" aria-hidden="true"></i> {% trans %}script{% endtrans %} </a>
                   </li>
                   {% for x in menu_element %}
-                    <li><a href="{{x.view}}"><i class="{{x.icon}}" aria-hidden="true"></i>{{x.text|trans}}</a></li>
+                    {{ set_textdomain(x.text) }}
+                    <li><a href="/{{locale}}{{x.view}}"><i class="{{x.icon}}" aria-hidden="true"></i>{{x.text|trans}}</a></li>
                   {% endfor %}
                 </ul>
                 
@@ -85,6 +86,7 @@
           </div>
         </div>
 
+      {{ set_textdomain('index') }}
 
                 <!-- top navigation -->
         <div class="top_nav">
@@ -96,7 +98,7 @@
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
-                    John Doe
+                    {% trans %}user{% endtrans %}
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -117,7 +119,7 @@
                 <!-- footer content -->
         <footer>
           <div class="pull-right">
-            Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
+            Macedonia by <a href="https://securipy.com/">Securipy</a>
           </div>
           <div class="clearfix"></div>
         </footer>

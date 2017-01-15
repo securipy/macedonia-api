@@ -34,17 +34,22 @@ class AuthController
 						$this->response->result = $token;
 						return $this->response->SetResponse(true,Language::_f("log in correct"));
 					}else{
-						return $this->response->SetResponse(false, "Error al generar el login");
+						return $this->response->SetResponse(false,Language::_f("error storing token"));
 					}
 				} else{
-					return $this->response->SetResponse(false, _("invalid credentials"));
+					return $this->response->SetResponse(false,Language::_f("invalid credentials"));
 				}
 			}else{
-				return $this->response->SetResponse(false, "Activa tu cuenta");
+				return $this->response->SetResponse(false,Language::_f("active account"));
 			}
 		}else{
-			return $this->response->SetResponse(false, "Credenciales no válidas");
+			return $this->response->SetResponse(false,Language::_f("invalid credentials"));
 		}
+	}
+
+	public function logout($token)
+	{
+		return $this->model->logout($token);
 	}
 
 }

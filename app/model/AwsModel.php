@@ -2,6 +2,7 @@
 namespace App\Model;
 
 use App\Lib\Response,
+App\Lib\Language,
 App\Lib\Auth;
 
 class AwsModel
@@ -25,9 +26,9 @@ class AwsModel
         $this->response->result = null;
         if($st->execute()){
             $this->response->result = $st->fetchAll();
-            return $this->response->SetResponse(true,'AWS Credentials');
+            return $this->response->SetResponse(true,Language::_f('aws credentials'));
         }else{
-            return $this->response->SetResponse(false,'Error get AWS Credentials');
+            return $this->response->SetResponse(false,Language::_f('error get aws credentials'));
         }
     }
 

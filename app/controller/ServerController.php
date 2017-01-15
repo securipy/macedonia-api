@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Lib\Response,
+App\Lib\Language,
 App\Lib\Auth;
 
 
@@ -63,7 +64,7 @@ class ServerController extends MasterController
 			}
 		}else{
 			$this->response->result = null;
-			$this->response->setResponse(False,"This not is your server");
+			$this->response->setResponse(False,Language::_f("this not is your server"));
 		}
 	}
 

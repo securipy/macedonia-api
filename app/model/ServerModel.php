@@ -2,6 +2,7 @@
 namespace App\Model;
 
 use App\Lib\Response,
+App\Lib\Language,
 App\Lib\Auth;
 
 class ServerModel
@@ -29,9 +30,9 @@ class ServerModel
         $this->response->result = null;
         if($st->execute()){
             $this->response->result = $st->fetchAll();
-            return $this->response->SetResponse(true,"server data");
+            return $this->response->SetResponse(true,Language::_f("server data"));
         }else{
-            return $this->response->SetResponse(false,"Error get servers");
+            return $this->response->SetResponse(false,Language::_f("error get servers"));
         }
     }
 
@@ -48,9 +49,9 @@ class ServerModel
         $this->response->result = null;
         if($st->execute()){
             $this->response->result = $st->fetchAll();
-            return $this->response->SetResponse(true,"server data");
+            return $this->response->SetResponse(true,Language::_f("server data"));
         }else{
-            return $this->response->SetResponse(false,"Error get servers");
+            return $this->response->SetResponse(false,Language::_f("error get servers"));
         }
     }
 
@@ -67,9 +68,9 @@ class ServerModel
         $this->response->result = null;
         if($st->execute()){
             $this->response->result = $st->fetchAll();
-            return $this->response->SetResponse(true,"server data");
+            return $this->response->SetResponse(true,Language::_f("server data"));
         }else{
-            return $this->response->SetResponse(false,"Error get servers");
+            return $this->response->SetResponse(false,Language::_f("error get servers"));
         }
     }
 
@@ -89,9 +90,9 @@ class ServerModel
         $this->response->result = null;
         if($st->execute()){
             $this->response->result =  $this->db->lastInsertId();
-            return $this->response->SetResponse(true,"delete scripts server");
+            return $this->response->SetResponse(true,Language::_f("delete scripts server"));
         }else{
-            return $this->response->SetResponse(false,"Error delete scripts server");
+            return $this->response->SetResponse(false,Language::_f("error delete scripts server"));
         }
     }
 
@@ -107,14 +108,14 @@ class ServerModel
         $this->response->result = null;
         if($st->execute()){
             $this->response->result =  $this->db->lastInsertId();
-            return $this->response->SetResponse(true,"Add Script Server");
+            return $this->response->SetResponse(true,Language::_f("add script server"));
         }else{
-            return $this->response->SetResponse(false,"Error Add Script Server");
+            return $this->response->SetResponse(false,Language::_f("error add script server"));
         }
     }
 
     public function deleteServerScripts($id_server)
-    {   //var_dump($id_server);
+    {   
         $st = $this->db->prepare("DELETE FROM servers_scripts WHERE id_server = :id_server");
 
         $st->bindParam(':id_server',$id_server);
@@ -122,10 +123,9 @@ class ServerModel
         $this->response->result = null;
         if($st->execute()){
             $this->response->result =  $st->rowCount();
-            //$this->response->result =  $this->db->lastInsertId();
-            return $this->response->SetResponse(true,"Delete Script Server");
+            return $this->response->SetResponse(true,Language::_f("delete script server"));
         }else{
-            return $this->response->SetResponse(false,"Delete Add Script Server");
+            return $this->response->SetResponse(false,Language::_f("delete add script server"));
         }
     }
 
@@ -145,10 +145,9 @@ class ServerModel
         $this->response->result = null;
         if($st->execute()){
             $this->response->result =  $st->rowCount();
-            //$this->response->result =  $this->db->lastInsertId();
-            return $this->response->SetResponse(true,"Update Server");
+            return $this->response->SetResponse(true,Language::_f("update server"));
         }else{
-            return $this->response->SetResponse(false,"Error Update Server");
+            return $this->response->SetResponse(false,Language::_f("error update server"));
         }
     }
 
@@ -166,9 +165,9 @@ class ServerModel
         $this->response->result = null;
         if($st->execute()){
             $this->response->result =  $st->rowCount();
-            return $this->response->SetResponse(true,"Delete Server");
+            return $this->response->SetResponse(true,Language::_f("deleted server"));
         }else{
-            return $this->response->SetResponse(false,"Error Delete Server");
+            return $this->response->SetResponse(false,Language::_f("error deleted server"));
         }
     }
 

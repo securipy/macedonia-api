@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Lib\Response,
+App\Lib\Language,
 App\Lib\Auth;
 
 
@@ -21,9 +22,19 @@ class ScriptsController
 		return $this->model->getScripts();
 	}
 
-	public function getScriptsEnabled($id,$script)
+	public function getScriptsEnabled($id,$scripts)
 	{
-		return $this->model->getScriptsEnabled($id,$script);
+		if(!empty($scripts)){
+			$allscripts = array();
+			foreach ($scripts as $key => $value) {
+				$data = $this->model->getScriptsEnabled($id,$value);
+				if($data->response == True && !empty($data->result)){
+					array_push($allscripts, $data->result);
+				}
+			}
+		}
+		$this->response->result = $allscripts;
+		return $this->response->SetResponse(true,Language::_f("script data"));
 	}
 
 }

@@ -14,7 +14,8 @@ $app->group('/scripts/', function () {
     $scripts = $this->controller->scripts->getScripts();
     if($type_petition == "html"){
       return $this->view->render($response, 'templates/listscripts.twig',[
-        'scripts' => $scripts
+        'scripts' => $scripts,
+        'locale' => $request->getAttribute('locale'),
       ]);
     }else{
      return $response->withHeader('Content-type', 'application/json')
@@ -26,11 +27,12 @@ $app->group('/scripts/', function () {
  })->add(new AuthMiddleware($this));
 
 
-  $this->get('list/{script}', function ($request, $response, $args) {
+  $this->get('list/{scripts:.*}', function ($request, $response, $args) {
     $token = $request->getAttribute('token');
     $type_petition = $request->getAttribute('type_petition');
     $id= Auth::GetData($token)->id;
-    $scripts = $this->controller->scripts->getScriptsEnabled($id,$args['script']);
+    $scripts_check = explode('/', $request->getAttribute('scripts'));
+    $scripts = $this->controller->scripts->getScriptsEnabled($id,$scripts_check);
 
      return $response->withHeader('Content-type', 'application/json')
      ->write(

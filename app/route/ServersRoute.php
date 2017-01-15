@@ -14,10 +14,11 @@ $app->group('/server/', function () {
     $type_petition = $request->getAttribute('type_petition');
     $id= Auth::GetData($token)->id;
     $servers = $this->controller->server->getServerByIdUser($id);
-    
+    var_dump($servers);
     if($type_petition == "html"){
       return $this->view->render($response, 'templates/listservers.twig',[
-        'servers' => $servers
+        'servers' => $servers,
+        'locale' => $request->getAttribute('locale'),
         ]);
     }else{
      return $response->withHeader('Content-type', 'application/json')
@@ -84,20 +85,12 @@ $app->group('/server/', function () {
 
 
 
-
-
-
   $this->post('new', function ($request, $response, $args) {
     $expected_fields = array('name','ip_domain','scripts');
 
     $data = GeneralFunction::createNullData($request->getParsedBody(),$expected_fields);
 
-    //var_dump($data);
-
-    
     $r = serverValidation::Validate($data);
-
-    //var_dump($r);
 
     $token = $request->getAttribute('token');
 
@@ -109,7 +102,8 @@ $app->group('/server/', function () {
 
     if($type_petition == "html"){
       return $this->view->render($response, 'listservers.twig',[
-        'servers' => $servers
+        'servers' => $servers,
+        'locale' => $request->getAttribute('locale'),
         ]);
     }else{
      return $response->withHeader('Content-type', 'application/json')

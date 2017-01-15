@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Lib\Response,
+App\Lib\Language,
 App\Lib\Auth;
 
 class XRequestController
@@ -26,7 +27,7 @@ class XRequestController
 				$correct_set = $this->model->setXrequestDomain($data['domain'],$data['max_request'],$data['type']);
 				return $this->response->SetResponse($correct_set[0], $correct_set[1]);
 			}else{
-				return $this->response->SetResponse(false, "Dominio ya registrado");
+				return $this->response->SetResponse(false, Language::_f("domain already registered"));
 			}
 
 			return $this->response->SetResponse(true);

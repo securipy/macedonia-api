@@ -56,7 +56,7 @@ msgstr "Fecha"
 
 #: 
 msgid "actions"
-msgstr "Acción"
+msgstr "Acciones"
 
 #: 
 msgid "new audit"
@@ -151,4 +151,159 @@ msgstr "Nuevo servidor"
 #: 
 msgid "server name"
 msgstr "Nombre del servidor"
+
+#: 
+msgid "error storing token"
+msgstr "Error al almacenar el token"
+
+#: 
+msgid "active account"
+msgstr "Active su cuenta"
+
+#: 
+msgid "login aws ec2 correct"
+msgstr "Login AWS ec2 correcto"
+
+#: 
+msgid "list aws instances"
+msgstr "Listado instancias AWS"
+
+#: 
+msgid "start aws instances"
+msgstr "Arrancando instancia AWS"
+
+#: 
+msgid "upload correct"
+msgstr "Subida correcta"
+
+#: 
+msgid "nothing to upload"
+msgstr "Nada que subir"
+
+#: 
+msgid "this not is your server"
+msgstr "Este no es tu servidor"
+
+#: 
+msgid "error closing session"
+msgstr "Error al cerrar la sesión"
+
+#: 
+msgid "session closed properly"
+msgstr "sesión cerrada correctamente"
+
+#: 
+msgid "failed to save login credentials"
+msgstr "Fallo al guardar las credenciales del login"
+
+#: 
+msgid "saved login credentials"
+msgstr "Credenciales de login guardadas"
+
+#: 
+msgid "error checking email"
+msgstr "Error al comprobar el correo electrónico "
+
+#: 
+msgid "aws credentials"
+msgstr "Credenciales AWS"
+
+#: 
+msgid "error get aws credentials"
+msgstr "Error al obtener las credenciales de AWS"
+
+#: 
+msgid "check server script"
+msgstr "Comprobado servidor con script"
+
+#: 
+msgid "error check server with script"
+msgstr "Error al comprobar servidor con script"
+
+#: 
+msgid "script data"
+msgstr "Datos del Script"
+
+#: 
+msgid "error get scripts"
+msgstr "Error al obtener los scripts"
+
+#: 
+msgid "server data"
+msgstr "Datos del servidor"
+
+#: 
+msgid "error get servers"
+msgstr "Error al obtener los servidores"
+
+#: 
+msgid "delete scripts server"
+msgstr "Eliminado script del servidor"
+
+#: 
+msgid "error delete scripts server"
+msgstr "Error al elimnar script del servidor"
+
+#: 
+msgid "add script server"
+msgstr "Añadir script al servidor"
+
+#: 
+msgid "error add script server"
+msgstr "Error al añadir script al servidor"
+
+#: 
+msgid "delete script server"
+msgstr "Eliminado script del servidor"
+
+#: 
+msgid "delete add script server"
+msgstr "Eliminar script del servidor"
+
+#: 
+msgid "update server"
+msgstr "Server actualizado"
+
+#: 
+msgid "error update server"
+msgstr "Error al actualizar el server"
+
+#: 
+#, fuzzy
+msgid "delete server?"
+msgstr "¿Eliminar el servidor?"
+
+#: 
+#, fuzzy
+msgid "error deleted server"
+msgstr "Error al eliminar el servidor"
+
+#: 
+msgid "are you sure you want to delete this server? you can not send more jobs"
+msgstr "¿Esta seguro de que quiere eliminar este servidor? No podrá enviar mas trabajos"
+
+#: 
+msgid "user"
+msgstr "usuario"
+
+#: 
+msgid "edit"
+msgstr "Editar"
+
+#: 
+#, fuzzy
+msgid "deleted server"
+msgstr "Servidor eliminado"
+
+#: 
+msgid "details"
+msgstr "Detalles"
+
+#: 
+msgid "start date"
+msgstr "Fecha de comienzo"
+
+#: 
+msgid "finish date"
+msgstr "Fecha de finalización"
 

@@ -3,5 +3,8 @@
     "add": "Añadir",
     "new": "Nuevo",
     "select": "Selecionar",
-    "edit": "Editar"
+    "edit": "Editar",
+    "copy the keys not show other time": "COPIE LAS CLAVES, no se volverán a mostrar",
+    "public key": "Clave publica",
+    "private key": "Clave privada"
 }

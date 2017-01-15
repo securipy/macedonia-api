@@ -10,6 +10,8 @@
  <!-- page content -->
  <div class="right_col" role="main">
   <div class="row">
+
+
    <div class="col-md-12 col-sm-12 col-xs-12">
     <div class="x_panel">
       <div class="x_title">
@@ -22,7 +24,7 @@
         <div class="clearfix"></div>
       </div>
       <div class="x_content">
-        <table id="datatable" class="table table-striped table-bordered">
+        <table id="server_datatable" class="table table-striped table-bordered">
           <thead>
             <tr>
               <th>{% trans %}name{% endtrans %}</th>
@@ -69,12 +71,12 @@
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
         </button>
-        <h4 class="modal-title" id="myModalLabel2">New Server</h4>
+        <h4 class="modal-title" id="myModalLabel2">{% trans %}new server{% endtrans %}</h4>
       </div>
       <div class="modal-body">
         <form class="form-horizontal form-label-left">
           <div class="form-group">
-            <label class="control-label col-md-4 col-sm-3 col-xs-12" for="first-name">Server Name <span class="required">*</span>
+            <label class="control-label col-md-4 col-sm-3 col-xs-12" for="first-name">{% trans %}server name{% endtrans %} <span class="required">*</span>
             </label>
             <div class="col-md-8 col-sm-6 col-xs-12">
               <input id="server-name" required="required" class="form-control col-md-7 col-xs-12" type="text">
@@ -82,7 +84,7 @@
           </div> 
 
           <div class="form-group">
-            <label class="control-label col-md-4 col-sm-3 col-xs-12" for="first-name">Ip/Domain<span class="required">*</span>
+            <label class="control-label col-md-4 col-sm-3 col-xs-12" for="first-name">{% trans %}ip/domain{% endtrans %}<span class="required">*</span>
             </label>
             <div class="col-md-8 col-sm-6 col-xs-12">
               <input id="server-ip-domain" required="required" class="form-control col-md-7 col-xs-12" type="text">
@@ -104,8 +106,8 @@
 
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" id="save-server">Save</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">{% trans %}close{% endtrans %}</button>
+        <button type="button" class="btn btn-primary" id="save-server">{% trans %}save{% endtrans %}</button>
       </div>
 
     </div>
@@ -119,15 +121,15 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Delete Server</h4>
+        <h4 class="modal-title">{% trans %}delete server?{% endtrans %}</h4>
       </div>
 
       <div class="modal-body">
-        Are you sure you want to delete this server? You can not send more jobs.
+        {% trans %}are you sure you want to delete this server? you can not send more jobs{% endtrans %}
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-info pull-left" data-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-danger" id="delete_server">Delete</button>
+        <button type="button" class="btn btn-info pull-left" data-dismiss="modal">{% trans %}cancel{% endtrans %}</button>
+        <button type="button" class="btn btn-danger" id="delete_server">{% trans %}delete{% endtrans %}</button>
       </div>
     </div>
 
@@ -141,7 +143,10 @@
 
 
 {% block javascript %}
- {{ parent() }}
+ <script type="text/javascript">
+ var language_site = '{{locale}}'
+ </script>
+{{ parent() }}
 <script src="{{ base_url() }}/js/Bootstrap-confirmation/bootstrap-confirmation.min.js"></script>
 <script src="{{ base_url() }}/js/servers.js"></script>
 

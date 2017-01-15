@@ -14,7 +14,8 @@ $app->group('/aws/', function () {
         $instances = $this->controller->aws->getInstancesByIdUser($id);
         if($type_petition == "html"){
             return $this->view->render($response, 'templates/awsintances.twig',[
-                'instances' => $instances
+                'instances' => $instances,
+                'locale' => $request->getAttribute('locale')
               ]);
         }else{
            return $response->withHeader('Content-type', 'application/json')

@@ -1,8 +1,15 @@
 $(document).ready(function(){
 
-	$('#datatable').on("click", ".start_aws", function() {
+	$('#aws_datatable').dataTable({
+		"language": {
+			"url": "/../locale/"+language_site+"/datatable.json",
+        }
+	});
+
+
+	$('#aws_datatable').on("click", ".start_aws", function() {
 		$.ajax({
-			url: "/aws/instance/start/"+$(this).data("id"),
+			url: "/"+language_site+"/aws/instance/start/"+$(this).data("id"),
 	        headers: {
         		'GRANADA-TOKEN':readCookie('token'),
         	},
@@ -11,15 +18,15 @@ $(document).ready(function(){
 			success: function(data) {
 				if(data.response==true){
 					new PNotify({
-						title: 'AWS Start',
+						title: 'AWS',
 						text: data.message,
 						type: 'success',
 						styling: 'bootstrap3'
 					});
-					window.location = '/aws/instances';
+					window.location = "/"+language_site+'/aws/instances';
 				}else{
 					new PNotify({
-						title: 'Error Audit',
+						title: 'Error AWS',
 						text: data.message,
 						styling: 'bootstrap3'
 					});
@@ -39,9 +46,9 @@ $(document).ready(function(){
 	});
 
 
-	$('#datatable').on("click", ".stop_aws", function() {
+	$('#aws_datatable').on("click", ".stop_aws", function() {
 		$.ajax({
-			url: "/aws/instance/stop/"+$(this).data("id"),
+			url: "/"+language_site+"/aws/instance/stop/"+$(this).data("id"),
 	        headers: {
         		'GRANADA-TOKEN':readCookie('token'),
         	},
@@ -50,7 +57,7 @@ $(document).ready(function(){
 			success: function(data) {
 				if(data.response==true){
 					new PNotify({
-						title: 'AWS Start',
+						title: 'AWS',
 						text: data.message,
 						type: 'success',
 						styling: 'bootstrap3'
@@ -58,7 +65,7 @@ $(document).ready(function(){
 					window.location = '/aws/instances';
 				}else{
 					new PNotify({
-						title: 'AWS Start Error',
+						title: 'AWS Error',
 						text: data.message,
 						styling: 'bootstrap3'
 					});

@@ -3,6 +3,7 @@ namespace App\Controller;
 
 use App\Lib\Response,
 App\Lib\Auth,
+App\Lib\Language,
 \Aws\Ec2\Ec2Client;
 
 
@@ -30,7 +31,7 @@ class AwsController
 			    'version' => $result_credentials->result[0]->version
 			));
 			$this->response->result = $ec2Client;
-			return $this->response->setResponse(true,'Login AWS ec2 correct');
+			return $this->response->setResponse(true,Language::_f('login aws ec2 correct'));
 
 			//return $ec2Client;
 		}else{
@@ -47,10 +48,10 @@ class AwsController
 			$result = $ec2Client->describeInstances()->get('Reservations');
 			
 			$this->response->result = $result;
-			return $this->response->setResponse(true,'List AWS instances');
+			return $this->response->setResponse(true,Language::_f('List AWS instances'));
 			//return $result;
 		}else{
-			return $result_credentials;
+			return $result_login_aws;
 		}
 
 	}
@@ -66,7 +67,7 @@ class AwsController
 		    ));
 			
 			$this->response->result = $result;
-			return $this->response->setResponse(true,'start AWS instances');
+			return $this->response->setResponse(true,Language::_f('start aws instances'));
 			//return $result;
 		}else{
 			return $result_credentials;
@@ -85,7 +86,7 @@ class AwsController
 		    ));
 			
 			$this->response->result = $result;
-			return $this->response->setResponse(true,'start AWS instances');
+			return $this->response->setResponse(true,Language::_f('start aws instances'));
 			//return $result;
 		}else{
 			return $result_credentials;

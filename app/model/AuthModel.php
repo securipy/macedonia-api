@@ -2,7 +2,9 @@
 namespace App\Model;
 
 use App\Lib\Response,
-App\Lib\Auth;
+App\Lib\Auth,
+App\Lib\Language;
+
 
 class AuthModel
 {
@@ -27,7 +29,7 @@ class AuthModel
           $result = $st->fetch();
           return $result;
         }else{
-          return array(false,'Error al consultar el email');
+          return array(false,Language::_f('error checking email'));
         }
     }
 
@@ -39,9 +41,23 @@ class AuthModel
         $st->bindParam(':token',$token);
 
         if($st->execute()){
-            return $this->response->SetResponse(true,'Credenciales de login guardadas');
+            return $this->response->SetResponse(true,Language::_f('saved login credentials'));
         }else{
-            return $this->response->SetResponse(false,'Error al guardar credenciales del login');
+            return $this->response->SetResponse(false,Language::_f('failed to save login credentials'));
+        }
+
+    }
+
+    public function logout($token)
+    {
+        $st = $this->db->prepare("DELETE FROM users_login WHERE token = :token");
+
+        $st->bindParam(':token',$token);
+
+        if($st->execute()){
+            return $this->response->SetResponse(true,Language::_f('session closed properly'));
+        }else{
+            return $this->response->SetResponse(false,Language::_f('error closing session'));
         }
 
     }

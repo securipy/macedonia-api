@@ -6,7 +6,7 @@ use Exception;
 class Language
 {
 
-	public function _f($text,$domain = "index")
+	public static function _f($text,$domain = "index")
 	{
 		textdomain($domain);
 		return _($text);

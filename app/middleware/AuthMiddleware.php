@@ -30,11 +30,12 @@ class AuthMiddleware
                     $st->bindParam(':token',$_COOKIE['token']);
                     if($st->execute()){
                         $result = $st->fetch();
-                        //error_log(var_dump($result));
+                        
                         if($result->exist_login > 0){
                             $request = $request->withAttribute('token', $_COOKIE['token']);
                          }else{
-                           return $response = $response->withRedirect('/auth/login', 401);
+                           // error_log(var_dump($result));
+                            return $response = $response->withRedirect('/auth/login', 401);
                         }
                     }else{
                         return $response->withStatus(500)

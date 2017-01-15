@@ -3,5 +3,8 @@
     "add": "Add",
     "new": "New",
     "select": "Select",
-    "edit": "Edit"
+    "edit": "Edit",
+    "copy the keys not show other time": "COPY THE KEYs not show other time",
+    "public key": "Public Key",
+    "private key": "Private Key"
 }

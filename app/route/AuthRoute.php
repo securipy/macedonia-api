@@ -79,12 +79,16 @@ $app->group('/auth/', function () {
             try {
                 Auth::Check($_COOKIE['token']);
             } catch (Exception $e) {
-                return $this->view->render($response, 'templates/login.twig');
+                return $this->view->render($response, 'templates/login.twig',[
+                    'locale' => $request->getAttribute('locale'),
+                ]);
             }
             return $response->withRedirect('/dashboard', 301);
 
         }else{
-            return $this->view->render($response, 'templates/login.twig');
+            return $this->view->render($response, 'templates/login.twig',[
+                    'locale' => $request->getAttribute('locale'),
+                ]);
         }
 
 
@@ -94,11 +98,12 @@ $app->group('/auth/', function () {
 
     $this->get('logout', function ($request, $response, $args) {
         if(isset($_COOKIE['token'])){
+            $this->controller->auth->logout($_COOKIE['token']);
             unset($_COOKIE['token']);
             setcookie('token', null, -1, '/');
         }
         return $response->withRedirect('/auth/login', 301);
-    });
+    })->add(new AuthMiddleware($this));
 
 
 });

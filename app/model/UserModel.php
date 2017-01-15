@@ -2,6 +2,7 @@
 namespace App\Model;
 
 use App\Lib\Response,
+App\Lib\Language,
 App\Lib\Auth;
 
 class UserModel
@@ -31,7 +32,7 @@ class UserModel
       $this->response->result = $result;
       return $this->response->SetResponse(true);
     }else{
-      return $this->response->SetResponse(false,'Error al consultar el email');
+      return $this->response->SetResponse(false,Language::_f('error checking email'));
     }
   }
 

@@ -1,6 +1,9 @@
 <?php
 namespace App\Model;
 
+use App\Lib\Language;
+
+
 class MasterModel
 {
     private $db;
@@ -26,9 +29,9 @@ class MasterModel
         $this->response->result = null;  
         if($st->execute()){
             $this->response->result = $st->fetch();
-            return $this->response->SetResponse(true,"Check server script");
+            return $this->response->SetResponse(true,Language::_f("check server script"));
         }else{
-          return $this->response->SetResponse(false,'Error check server with script');
+          return $this->response->SetResponse(false,Language::_f('error check server with script'));
         }
 
 	}

@@ -1,7 +1,8 @@
 <?php
 namespace App\Controller;
 
-use App\model\MasterModel;
+use App\model\MasterModel,
+App\Lib\Language;
 
 
 class MasterController
@@ -40,10 +41,10 @@ class MasterController
                     return $this->response->SetResponse(false,$e->getMessage());
                 }
                 $this->response->result = $uploadFileName;
-                return $this->response->SetResponse(True,"Upload correct");            
+                return $this->response->SetResponse(True,Language::_f('upload correct'));            
             }
         }else{
-                return $this->response->SetResponse(false,"Nothing to Upload");            
+                return $this->response->SetResponse(false,Language::_f("nothing to upload"));            
         }
 	}
 
