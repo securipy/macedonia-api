@@ -17,6 +17,7 @@ class ScriptsController
 	}
 
 
+
 	public function getScripts()
 	{
 		return $this->model->getScripts();
@@ -36,5 +37,17 @@ class ScriptsController
 		$this->response->result = $allscripts;
 		return $this->response->SetResponse(true,Language::_f("script data"));
 	}
+
+
+	public function getServerScripts($id,$module)
+	{
+		return $this->model->getServerScripts($id,$module);
+	}
+
+	public function getScriptsByModule($module)
+	{
+		return $this->model->getScriptsByModule($module);
+	}
+
 
 }

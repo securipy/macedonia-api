@@ -5,7 +5,7 @@ $container = $app->getContainer();
 // Register Twig View helper
 $container['view'] = function ($c) {
     $view = new \Slim\Views\Twig(__DIR__.'/../app',[
-            'debug' => true
+        'debug' => true
         ]);
 
 
@@ -29,15 +29,15 @@ $container['view'] = function ($c) {
 
     if(isset($_COOKIE['audit']) && !empty($_COOKIE['audit'])){
 
-    $basePathModules = __DIR__ . '/../app/';
+        $basePathModules = __DIR__ . '/../app/';
 
-    $path = $basePathModules.'modules';
-    $results = scandir($path);
-    $menu = array();
-    $content_xml = "";
+        $path = $basePathModules.'modules';
+        $results = scandir($path);
+        $menu = array();
+        $content_xml = "";
 
-    foreach ($results as $result) {
-        if ($result === '.' or $result === '..') continue;
+        foreach ($results as $result) {
+            if ($result === '.' or $result === '..') continue;
             if(file_exists($path . '/' . $result.'/menu.xml')){
                 if($d = fopen($path . '/' . $result.'/menu.xml', "r")){
                     while ($aux= fgets($d, 1024)){
@@ -50,7 +50,7 @@ $container['view'] = function ($c) {
                     fclose($d);
                 }
             }
-    }
+        }
         $view->getEnvironment()->addGlobal('menu_element',$menu);
 
         $view->getEnvironment()->addGlobal('ga_menu', True);
@@ -106,14 +106,16 @@ $container['mail'] = function($c){
 // Models
 $container['model'] = function($c){
     $base = (object)[
-        'user' => new App\Model\UserModel($c->db),
-        'auth' => new App\Model\AuthModel($c->db),
-        'xrequest' => new App\Model\XRequestModel($c->db),
-        'dashboard' => new App\Model\DashboardModel($c->db),
-        'audit' => new App\Model\AuditModel($c->db),
-        'aws' => new App\Model\AwsModel($c->db),
-        'server' => new App\Model\ServerModel($c->db),
-        'scripts' => new App\Model\ScriptsModel($c->db),
+    'user' => new App\Model\UserModel($c->db),
+    'auth' => new App\Model\AuthModel($c->db),
+    'xrequest' => new App\Model\XRequestModel($c->db),
+    'dashboard' => new App\Model\DashboardModel($c->db),
+    'audit' => new App\Model\AuditModel($c->db),
+    'aws' => new App\Model\AwsModel($c->db),
+    'server' => new App\Model\ServerModel($c->db),
+    'scripts' => new App\Model\ScriptsModel($c->db),
+    'devices' => new App\Model\DevicesModel($c->db),
+
     ];
 
     $basePathModules = __DIR__ . '/../app/';
@@ -121,13 +123,24 @@ $container['model'] = function($c){
     $path = $basePathModules.'modules';
     $results = scandir($path);
 
+
     foreach ($results as $result) {
         if ($result === '.' or $result === '..') continue;
-        if(file_exists($path . '/' . $result.'/'.ucfirst($result)."Model.php")){
-            $model = "App\Model\\".ucfirst($result)."Model";
-            $base->$result = new $model($c->db);
+        $final_path = $path."/".$result;
+        if(is_dir($final_path)){
+            $final_results = scandir($final_path);
+            foreach ($final_results as $final_result) {
+                if ($final_result === '.' or $final_result === '..') continue;
+                if(file_exists($final_path . '/' . $final_result.'/'.ucfirst($final_result)."Model.php")){
+                    $model = "App\Model\\".ucfirst($final_result)."Model";
+                    $base->$final_result = new $model($c->db);
+                }
+            }
         }
     }
+
+
+
 
     return $base;
 };
@@ -139,14 +152,16 @@ $container['model'] = function($c){
 // Models
 $container['controller'] = function($c){
     $base = (object)[
-        'user' => new App\Controller\UserController($c->model->user),
-        'auth' => new App\Controller\AuthController($c->model->auth),
-        'xrequest' => new App\Controller\XRequestController($c->model->xrequest),
-        'dashboard' => new App\Controller\DashboardController($c->model->dashboard),
-        'audit' => new App\Controller\AuditController($c->model->audit),
-        'aws' => new App\Controller\AwsController($c->model->aws),
-        'server' => new App\Controller\ServerController($c->model->server,$c->db),
-        'scripts' => new App\Controller\ScriptsController($c->model->scripts),
+    'user' => new App\Controller\UserController($c->model->user),
+    'auth' => new App\Controller\AuthController($c->model->auth),
+    'xrequest' => new App\Controller\XRequestController($c->model->xrequest),
+    'dashboard' => new App\Controller\DashboardController($c->model->dashboard,$c->db),
+    'audit' => new App\Controller\AuditController($c->model->audit),
+    'aws' => new App\Controller\AwsController($c->model->aws),
+    'server' => new App\Controller\ServerController($c->model->server,$c->db),
+    'scripts' => new App\Controller\ScriptsController($c->model->scripts),
+    'devices' => new App\Controller\DevicesController($c->model->devices,$c->db),
+
     ];
 
     $basePathModules = __DIR__ . '/../app/';
@@ -154,11 +169,19 @@ $container['controller'] = function($c){
     $path = $basePathModules.'modules';
     $results = scandir($path);
 
+
     foreach ($results as $result) {
         if ($result === '.' or $result === '..') continue;
-        if(file_exists($path . '/' . $result.'/'.ucfirst($result)."Controller.php")){
-            $controller = "App\Controller\\".ucfirst($result)."Controller";
-            $base->$result = new $controller($c->model->$result,$c->db);
+        $final_path = $path."/".$result;
+        if(is_dir($final_path)){
+            $final_results = scandir($final_path);
+            foreach ($final_results as $final_result) {
+                if ($final_result === '.' or $final_result === '..') continue;
+                if(file_exists($final_path . '/' . $final_result.'/'.ucfirst($final_result)."Controller.php")){
+                    $controller = "App\Controller\\".ucfirst($final_result)."Controller";
+                    $base->$final_result = new $controller($c->model->$final_result,$c->db);
+                }
+            }
         }
     }
 

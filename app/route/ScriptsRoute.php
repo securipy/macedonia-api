@@ -41,6 +41,20 @@ $app->group('/scripts/', function () {
 
  })->add(new AuthMiddleware($this));
 
+  $this->get('server/list/{module}', function ($request, $response, $args) {
+    $token = $request->getAttribute('token');
+    $type_petition = $request->getAttribute('type_petition');
+    $id= Auth::GetData($token)->id;
+    $scripts = $this->controller->scripts->getServerScripts($id,$args['module']);
+
+     return $response->withHeader('Content-type', 'application/json')
+     ->write(
+       json_encode($scripts)
+       );
+
+ })->add(new AuthMiddleware($this));
+
+
 
 
 });

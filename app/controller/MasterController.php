@@ -20,10 +20,23 @@ class MasterController
 	}
 
 
-	public function checkServerScriptByUser($id_user,$id_server,$id_script)
+	public function checkServerScriptByUser($id_user,$id_server,$name_scripts)
 	{
-		return $this->model->checkServerScriptByUser($id_user,$id_server,$id_script);
+		return $this->model->checkServerScriptByUser($id_user,$id_server,$name_scripts);
 	}
+
+
+	public function setScriptServerWork($id,$id_device,$id_script_server,$day_scan)
+	{
+		return $this->model->setScriptServerWork($id,$id_device,$id_script_server,$day_scan);
+	}
+
+
+	public function getWorksById($id_work)
+	{
+		return $this->model->getWorksById($id_work);
+	}
+
 
 
 	//TODO: Add filters type file, size... 

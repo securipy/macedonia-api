@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jan 04, 2017 at 12:38 AM
--- Server version: 5.7.16-0ubuntu0.16.04.1
--- PHP Version: 7.0.8-0ubuntu0.16.04.3
+-- Generation Time: Jan 25, 2017 at 06:06 AM
+-- Server version: 5.7.17
+-- PHP Version: 7.0.13-0ubuntu0.16.04.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -84,9 +84,11 @@ CREATE TABLE `devices_files_nmap` (
 CREATE TABLE `devices_ports` (
   `id` int(11) NOT NULL,
   `id_device` int(11) NOT NULL,
+  `id_work` int(255) NOT NULL,
   `port` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
   `protocol` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
   `service` varchar(210) COLLATE utf8_unicode_ci NOT NULL,
+  `version` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `status` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   `extra` text COLLATE utf8_unicode_ci,
   `date_create` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
@@ -115,16 +117,18 @@ CREATE TABLE `dns` (
 CREATE TABLE `scripts` (
   `id` int(11) NOT NULL,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `description` text COLLATE utf8_unicode_ci NOT NULL
+  `description` text COLLATE utf8_unicode_ci NOT NULL,
+  `module` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `url` varchar(255) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `scripts`
 --
 
-INSERT INTO `scripts` (`id`, `name`, `description`) VALUES
-(1, 'Nmap', 'Script to scan host with nmap'),
-(2, 'dns', 'test dns');
+INSERT INTO `scripts` (`id`, `name`, `description`, `module`, `url`) VALUES
+(1, 'Nmap', 'Script to scan host with nmap', 'device', '/device/nmap/list/'),
+(2, 'dns', 'test dns', 'device', '');
 
 -- --------------------------------------------------------
 
@@ -308,7 +312,8 @@ ALTER TABLE `devices_files_nmap`
 --
 ALTER TABLE `devices_ports`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `id_device` (`id_device`);
+  ADD KEY `id_device` (`id_device`),
+  ADD KEY `id_work` (`id_work`);
 
 --
 -- Indexes for table `dns`
@@ -356,7 +361,8 @@ ALTER TABLE `users`
 -- Indexes for table `users_login`
 --
 ALTER TABLE `users_login`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_user` (`id_user`);
 
 --
 -- Indexes for table `user_url_access`
@@ -474,10 +480,17 @@ ALTER TABLE `aws_credentials`
   ADD CONSTRAINT `aws_credentials_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`);
 
 --
+-- Constraints for table `devices`
+--
+ALTER TABLE `devices`
+  ADD CONSTRAINT `devices_ibfk_1` FOREIGN KEY (`id_audit`) REFERENCES `audit` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Constraints for table `devices_ports`
 --
 ALTER TABLE `devices_ports`
-  ADD CONSTRAINT `devices_ports_ibfk_1` FOREIGN KEY (`id_device`) REFERENCES `devices` (`id`);
+  ADD CONSTRAINT `devices_ports_ibfk_1` FOREIGN KEY (`id_device`) REFERENCES `devices` (`id`),
+  ADD CONSTRAINT `devices_ports_ibfk_2` FOREIGN KEY (`id_work`) REFERENCES `script_work` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `script_work`
@@ -497,6 +510,12 @@ ALTER TABLE `servers`
 ALTER TABLE `servers_scripts`
   ADD CONSTRAINT `servers_scripts_ibfk_1` FOREIGN KEY (`id_server`) REFERENCES `servers` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
   ADD CONSTRAINT `servers_scripts_ibfk_2` FOREIGN KEY (`id_scripts`) REFERENCES `scripts` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `users_login`
+--
+ALTER TABLE `users_login`
+  ADD CONSTRAINT `users_login_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`);
 
 --
 -- Constraints for table `wifi_data`

@@ -1,0 +1,144 @@
+{% extends "templates/base.twig" %} 
+
+{% block body %}
+
+
+
+   <!-- page content -->
+        <div class="right_col" role="main">
+          <div class="row">
+          	<div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                   {{ set_textdomain('index') }}
+                    <h2>{% trans %}device list{% endtrans %}</h2>
+                      <ul class="nav navbar-right panel_toolbox">
+                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                        <li id="add-device"><a><i class="fa fa-plus"></i></a></li>
+                      </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                    <table id="devices_datatable" class="table table-striped table-bordered">
+                      <thead>
+                        <tr>
+                          <th>{% trans %}ip/domain{% endtrans %}</th>
+                          <th>{% trans %}actions{% endtrans %}</th>
+                        </tr>
+                      </thead>
+
+
+                      <tbody>
+                      {% if devices.response == true %}
+                      	{% for device in devices.result%}
+                        <tr>
+                          <td>{{device.ip_domain}}</td>
+                          <td>
+                            {% if scripts.response == true %}
+                              <div class="btn-group">
+                                <button type="button" class="btn btn-default">{% trans %}actions{% endtrans %}</button>
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                  <span class="caret"></span>
+                                  <span class="sr-only">Toggle Dropdown</span>
+                                </button>
+                                <ul class="dropdown-menu" role="menu">
+                                  {% for script in scripts.result %}
+                                    <li><a href="{{script.url}}{{device.id_device}}">{{script.name}}</a></li>
+                                  {% endfor %}
+                                  </li>
+                                </ul>
+                              </div>
+                            {% endif %}
+                            <button type="button" class="btn btn-danger delete_device" data-id="{{device.id_device}}">{% trans %}delete{% endtrans %}</button>
+                          </td>
+            
+                        </tr>
+                        {% endfor %}
+                        {% endif %}
+
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+          </div>
+
+
+        </div>
+        <!-- /page content -->
+
+<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-hidden="true" id="add-new-device-modal">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
+        </button>
+        {{ set_textdomain('devices') }}
+        <h4 class="modal-title" id="myModalLabel2">{% trans %}new device{% endtrans %}</h4>
+      </div>
+      <div class="modal-body">
+        <form class="form-horizontal form-label-left">
+          <div class="form-group">
+            {{ set_textdomain('index') }}
+            <label class="control-label col-md-4 col-sm-3 col-xs-12" for="first-name">{% trans %}ip/domain{% endtrans %}<span class="required">*</span>
+            </label>
+            <div class="col-md-8 col-sm-6 col-xs-12">
+              <input id="server-ip-domain" required="required" class="form-control col-md-7 col-xs-12" type="text">
+            </div>
+          </div>  
+          <div class="form-group">
+            <br>
+           
+          </div>
+
+
+        </form>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">{% trans %}close{% endtrans %}</button>
+        <button type="button" class="btn btn-primary" id="save-device">{% trans %}save{% endtrans %}</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<div class="modal modal-danger fade" id="myModal_delete_server" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">{% trans %}delete device?{% endtrans %}</h4>
+      </div>
+
+      <div class="modal-body">
+        {% trans %}are you sure you want to delete this device? You will lose all scan information{% endtrans %}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-info pull-left" data-dismiss="modal">{% trans %}cancel{% endtrans %}</button>
+        <button type="button" class="btn btn-danger" id="delete_server">{% trans %}delete{% endtrans %}</button>
+      </div>
+    </div>
+
+  </div>
+</div><!-- /.modal -->
+
+
+
+
+
+{% endblock %}
+
+
+{% block javascript %}
+   <script type="text/javascript">
+ var language_site = '{{locale}}'
+ </script>
+ {{ parent() }}
+  <script src="{{ base_url() }}/js/devices.js"></script>
+{% endblock %}
+

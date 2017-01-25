@@ -5,14 +5,16 @@ use App\Lib\Response,
 App\Lib\Auth;
 
 
-class DashboardController
+class DashboardController extends MasterController
 {
 	private $response;
 
-	public function __construct($model)
+	public function __construct($model,$connection)
 	{
 		$this->response = new Response();
 		$this->model = $model;
+		parent::__construct($connection,$this->response);
+
 	}
 
 
@@ -20,6 +22,7 @@ class DashboardController
 	{
 		return $this->model->getAuditByIdUser($id);
 	}
+
 
 
 }
