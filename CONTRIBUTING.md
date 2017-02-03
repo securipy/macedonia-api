@@ -12,3 +12,12 @@ pull request for each branch. This allows us to review and pull in new features 
 ## Style Guide
 
 All pull requests must adhere to the [PSR-2 standard](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md).
+
+
+## Translation
+
+If you want to help with translations are available in Poeditor:
+
+* [Back-End](https://poeditor.com/join/project/ySFRKccBSV)
+
+* [Front-End]( https://poeditor.com/join/project/wM2E25iPWH)

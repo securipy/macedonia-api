@@ -121,35 +121,13 @@ $container['model'] = function($c){
     $basePathModules = __DIR__ . '/../app/';
 
     $path = $basePathModules.'modules';
-    $results = scandir($path);
 
-
-    foreach ($results as $result) {
-        if ($result === '.' or $result === '..') continue;
-        $final_path = $path."/".$result;
-        if(is_dir($final_path)){
-            $final_results = scandir($final_path);
-            foreach ($final_results as $final_result) {
-                if ($final_result === '.' or $final_result === '..') continue;
-                if(file_exists($final_path . '/' . $final_result.'/'.ucfirst($final_result)."Model.php")){
-                    $model = "App\Model\\".ucfirst($final_result)."Model";
-                    $base->$final_result = new $model($c->db);
-                }
-            }
-        }
-    }
-
-
-
-
-    return $base;
+    return loadModules($path,'Model',$c,$base);
 };
 
 
 
-
-
-// Models
+// Controller
 $container['controller'] = function($c){
     $base = (object)[
     'user' => new App\Controller\UserController($c->model->user),
@@ -167,23 +145,52 @@ $container['controller'] = function($c){
     $basePathModules = __DIR__ . '/../app/';
 
     $path = $basePathModules.'modules';
+
+    return loadModules($path,'Controller',$c,$base);
+};
+
+
+
+function loadModules($path,$type,$c,$base)
+{   
     $results = scandir($path);
-
-
-    foreach ($results as $result) {
-        if ($result === '.' or $result === '..') continue;
-        $final_path = $path."/".$result;
-        if(is_dir($final_path)){
-            $final_results = scandir($final_path);
-            foreach ($final_results as $final_result) {
-                if ($final_result === '.' or $final_result === '..') continue;
-                if(file_exists($final_path . '/' . $final_result.'/'.ucfirst($final_result)."Controller.php")){
-                    $controller = "App\Controller\\".ucfirst($final_result)."Controller";
-                    $base->$final_result = new $controller($c->model->$final_result,$c->db);
+    if(!empty($results))
+    {
+        foreach ($results as $result) 
+        {
+            if ($result === '.' or $result === '..') continue;
+            $final_path = $path."/".$result;
+            if(is_dir($final_path))
+            {
+                $base = loadModules($final_path,$type,$c,$base);
+            }
+            else
+            {
+           // echo $result;
+                if($type == "Model")
+                {
+                    $parts = explode($type, $result);
+                    if(file_exists(substr($final_path,0,strrpos($final_path, "/"))."/".$parts[0].$type.".php"))
+                    {
+                  //  echo "dentro";
+                        $model = "App\Model\\".$parts[0]."Model";
+                        $partlowwer = strtolower($parts[0]);
+                        $base->$partlowwer = new $model($c->db);
+                    }
+                }
+                else
+                {
+                    $parts = explode($type, $result);
+                    if(file_exists(substr($final_path,0,strrpos($final_path, "/"))."/".$parts[0].$type.".php"))
+                    {
+                        $controller = "App\Controller\\".$parts[0]."Controller";
+                        $partlowwer = strtolower($parts[0]);
+                        $base->$partlowwer = new $controller($c->model->$partlowwer,$c->db);
+                    }
                 }
             }
         }
     }
-
+   // var_dump($base);
     return $base;
-};
+}

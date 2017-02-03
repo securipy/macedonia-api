@@ -39,7 +39,7 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="/{{locale}}/dashboard" class="site_title"><i class="fa fa-paw"></i> <span>Macedonia</span></a>
+              <a href="/{{locale}}/dashboard" class="site_title"><img src="/images/logo.png"></i> <span>Macedonia</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -72,6 +72,8 @@
                   <li><a href="/{{locale}}/aws/instances"><i class="fa fa-amazon" aria-hidden="true"></i> AWS </a></li>
                   <li><a href="/{{locale}}/server/list"><i class="fa fa-server" aria-hidden="true"></i> {% trans %}server{% endtrans %} </a></li>
                   <li><a href="/{{locale}}/scripts/list"><i class="fa fa-file-code-o" aria-hidden="true"></i> {% trans %}script{% endtrans %} </a>
+                  </li>
+                  <li><a href="/{{locale}}/device/list"><i class="fa fa-desktop" aria-hidden="true"></i> {% trans %}devices{% endtrans %} </a>
                   </li>
                   {% for x in menu_element %}
                     {{ set_textdomain(x.text) }}

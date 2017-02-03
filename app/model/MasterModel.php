@@ -15,6 +15,67 @@ class MasterModel
         $this->response = $response;
     }
 
+
+    public function getFile($code)
+    {
+       $st = $this->db->prepare("SELECT * FROM files WHERE code=:code");
+        $st->bindParam(':code',$code);
+        if($st->execute()){
+            $this->response->result = $st->fetch();
+            return $this->response->SetResponse(true,"Data file");
+        }else{
+          return $this->response->SetResponse(false,'Error data file');
+        }
+    }
+
+    public function checkFileUser($table,$id_table,$id_audit,$id_user)
+    {
+        $st = $this->db->prepare("SELECT COUNT(*) as valid FROM ".$table." as t,audit as a WHERE t.id=:id_table AND a.id_user=:id_user AND t.id_audit=:id_audit AND t.id_audit=a.id");
+        $st->bindParam(':id_table',$id_table);
+        $st->bindParam(':id_user',$id_user);
+        $st->bindParam(':id_audit',$id_audit);
+        if($st->execute()){
+            $this->response->result = $st->fetch();
+            return $this->response->SetResponse(true,"Data file");
+        }else{
+          return $this->response->SetResponse(false,'Error data file');
+        }
+    }
+
+
+    public function checkFileServer($table,$id_table,$id_server)
+    {
+        $st = $this->db->prepare("SELECT COUNT(*) as valid FROM ".$table." as t,audit as a, servers as s WHERE t.id=:id_table AND a.id_user=s.id_user AND s.id=:id_server AND t.id_audit=a.id");
+        $st->bindParam(':id_table',$id_table);
+        $st->bindParam(':id_server',$id_server);
+       
+        if($st->execute()){
+            $this->response->result = $st->fetch();
+            return $this->response->SetResponse(true,"Data file");
+        }else{
+          return $this->response->SetResponse(false,'Error data file');
+        }
+    }
+
+
+
+
+    public function setFileDatabase($code,$file,$id_table_file,$table_file)
+    {
+        $st = $this->db->prepare("INSERT INTO files (code,file,table_file,id_table_file) VALUES (:code,:file,:table_file,:id_table_file)");
+        $st->bindParam(':code',$code);
+        $st->bindParam(':file',$file);
+        $st->bindParam(':table_file',$table_file);
+        $st->bindParam(':id_table_file',$id_table_file);
+        if($st->execute()){
+            $this->response->result = $this->db->lastInsertId();
+            return $this->response->SetResponse(true,"Insert file database");
+        }else{
+          return $this->response->SetResponse(false,'Error insert file database');
+        }
+    }
+
+
 	public function checkServerScriptByUser($id_user,$id_server,$name_scripts)
 	{
     

@@ -25,22 +25,33 @@ foreach($folders as $f)
 
 
 $path = $base.'modules';
-$results = scandir($path);
 
 
-foreach ($results as $result) {
-    if ($result === '.' or $result === '..') continue;
-    $final_path = $path."/".$result;
-    if(is_dir($final_path)){
-        $final_results = scandir($final_path);
-        foreach ($final_results as $final_result) {
-            if ($final_result === '.' or $final_result === '..') continue;
-            foreach (glob($final_path . '/' . $final_result . "/*.php") as $k => $filename)
+loadFiles($path);
+
+function loadFiles($path)
+{   
+    global $app;
+    $results = scandir($path);
+    foreach ($results as $result) 
+    { 
+        if ($result === '.' or $result === '..') continue;
+        $final_path = $path."/".$result;
+        if(is_dir($final_path))
+        {
+            loadFiles($final_path);
+        }
+        else
+        {
+            $parts = explode(".", $result );
+            if(isset($parts[1]))
             {
-                require_once $filename;
+                if($parts[1] === "php")
+                {
+                    require_once $final_path;
+                }
             }
         }
-
     }
 }
 

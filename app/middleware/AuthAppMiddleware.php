@@ -30,7 +30,6 @@ class AuthAppMiddleware
 
         if($st->execute()){
             $result = $st->fetch();
-            //error_log(var_dump($result));
             if(!empty($result)){
                 try {
                     $public_key = JWT::decode(
