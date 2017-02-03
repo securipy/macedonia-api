@@ -3,8 +3,8 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jan 25, 2017 at 06:06 AM
--- Server version: 5.7.17
+-- Generation Time: Feb 03, 2017 at 04:39 PM
+-- Server version: 5.7.17-0ubuntu0.16.04.1
 -- PHP Version: 7.0.13-0ubuntu0.16.04.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -111,6 +111,20 @@ CREATE TABLE `dns` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `files`
+--
+
+CREATE TABLE `files` (
+  `id` int(255) NOT NULL,
+  `code` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `file` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `table_file` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `id_table_file` int(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `scripts`
 --
 
@@ -128,7 +142,8 @@ CREATE TABLE `scripts` (
 
 INSERT INTO `scripts` (`id`, `name`, `description`, `module`, `url`) VALUES
 (1, 'Nmap', 'Script to scan host with nmap', 'device', '/device/nmap/list/'),
-(2, 'dns', 'test dns', 'device', '');
+(2, 'dns', 'test dns', 'device', ''),
+(3, 'Pyrit', 'Crack Wifi With Pirit', 'wifi', '');
 
 -- --------------------------------------------------------
 
@@ -245,10 +260,10 @@ CREATE TABLE `wifi_data` (
   `id_audit` int(11) NOT NULL,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `mac` varchar(18) COLLATE utf8_unicode_ci NOT NULL,
-  `file` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `date_create` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `process` int(2) NOT NULL DEFAULT '0',
-  `password` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL
+  `password` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `message` varchar(500) COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -321,6 +336,12 @@ ALTER TABLE `devices_ports`
 ALTER TABLE `dns`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_audit` (`id_audit`);
+
+--
+-- Indexes for table `files`
+--
+ALTER TABLE `files`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `scripts`
@@ -419,10 +440,15 @@ ALTER TABLE `devices_ports`
 ALTER TABLE `dns`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
+-- AUTO_INCREMENT for table `files`
+--
+ALTER TABLE `files`
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT for table `scripts`
 --
 ALTER TABLE `scripts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `script_work`
 --
