@@ -34,5 +34,10 @@ class DevicesController extends MasterController
 	}
 
 
+	public function deleteDevice($id,$id_user)
+	{
+		return $this->model->deleteDevice($id,$id_user);
+	}
+
 
 }

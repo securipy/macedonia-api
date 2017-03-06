@@ -2,6 +2,7 @@
 namespace App\Model;
 
 use App\Lib\Response,
+App\Lib\Language,
 App\Lib\Auth;
 
 class DevicesModel extends MasterModel
@@ -87,6 +88,22 @@ class DevicesModel extends MasterModel
         }
     }
 
+
+    public function deleteDevice($id,$id_user)
+    {
+        $st = $this->db->prepare("DELETE FROM devices WHERE id = :id AND id_audit IN (SELECT id FROM audit WHERE id_user=:id_user) LIMIT 1");
+
+        $st->bindParam(':id',$id);
+        $st->bindParam(':id_user',$id_user);
+
+        $this->response->result = null;
+        if($st->execute()){
+            $this->response->result =  $st->rowCount();
+            return $this->response->SetResponse(true,Language::_f("delete device"));
+        }else{
+            return $this->response->SetResponse(false,Language::_f("error delete device"));
+        }
+    }
 
 
 }

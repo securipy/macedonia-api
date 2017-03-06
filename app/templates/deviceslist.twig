@@ -7,6 +7,7 @@
    <!-- page content -->
         <div class="right_col" role="main">
           <div class="row">
+
           	<div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
@@ -107,7 +108,7 @@
 </div>
 
 
-<div class="modal modal-danger fade" id="myModal_delete_server" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal modal-danger fade" id="myModal_delete_device" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -120,7 +121,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-info pull-left" data-dismiss="modal">{% trans %}cancel{% endtrans %}</button>
-        <button type="button" class="btn btn-danger" id="delete_server">{% trans %}delete{% endtrans %}</button>
+        <button type="button" class="btn btn-danger" id="delete_device_confirm">{% trans %}delete{% endtrans %}</button>
       </div>
     </div>
 
@@ -137,6 +138,7 @@
 {% block javascript %}
    <script type="text/javascript">
  var language_site = '{{locale}}'
+ var scripts_list = JSON.parse('{{scripts.result|json_encode()|raw}}')
  </script>
  {{ parent() }}
   <script src="{{ base_url() }}/js/devices.js"></script>

@@ -67,4 +67,19 @@ $app->group('/device', function () {
 
 
 
+  $this->delete('/{id:[0-9]+}', function ($request, $response, $args) {
+    $token = $request->getAttribute('token');
+
+    $id= Auth::GetData($token)->id;
+    $servers = $this->controller->devices->deleteDevice($args['id'],$id);
+
+    return $response->withHeader('Content-type', 'application/json')
+    ->write(
+     json_encode($servers)
+     );
+    
+  })->add(new AuditMiddleware($this))->add(new AuthMiddleware($this));
+
+
+
 });

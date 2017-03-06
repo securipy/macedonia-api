@@ -1,17 +1,69 @@
 $(document).ready(function(){
 
+	//console.log(scripts_list)
+
+
+
 	$('#devices_datatable').dataTable({
 		"language": {
 			"url": "/../locale/"+language_site+"/datatable.json",
         }
 	});
 
-
+	var id_device = 0;
 	var id_scan = 0;
 
 
+	$("#delete_device_confirm").click(function(){
+		$.ajax({
+			url: "/"+language_site+"/device/"+id_device,
+			headers: {
+				'GRANADA-TOKEN':readCookie('token'),
+				'audit':readCookie('audit'),
+
+			},
+			type: "delete",
+			dataType: "json",
+			success: function(data) {
+				if(data.response==true && data.result == 1){
+					new PNotify({
+						title: 'Server',
+						text: data.message,
+						type: 'success',
+						styling: 'bootstrap3'
+					});
+
+					var oTable = $('#devices_datatable').dataTable()
+					var nRow = $("button[data-id="+id_device+"]").parent().parent('tr')[0];
+					oTable.fnDeleteRow( nRow );
+					$("#myModal_delete_device").modal('hide');
+
+				}else{
+					new PNotify({
+						title: 'Error Server',
+						text: data.message,
+						styling: 'bootstrap3'
+					});
+				}
+			},
+			error: function(xhr, status, error) {
+				new PNotify({
+					title: 'Oh No!',
+					text: xhr.responseText,
+					type: 'error',
+					styling: 'bootstrap3'
+				});
+				var err = eval("(" + xhr.responseText + ")");
+				console.log(err);
+			}
+		});
+	});
+
+
+
 	$('#devices_datatable').on("click", ".delete_device", function() {
-		
+		id_device = $(this).data("id");
+		$("#myModal_delete_device").modal('show');
 	});
 
 
@@ -61,9 +113,23 @@ $(document).ready(function(){
 					});
 					var oTable = $('#devices_datatable').dataTable();
 					if(id_scan == 0){
+						var_html = '<div class="btn-group">'+
+                                '<button type="button" class="btn btn-default">Actions</button>'+
+                                '<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">'+
+                                  '<span class="caret"></span>'+
+                                  '<span class="sr-only">Toggle Dropdown</span>'+
+                                '</button>'+
+                                '<ul class="dropdown-menu" role="menu">'
+									$.each(scripts_list, function(i, plugin) {
+										var_html =var_html + '<li><a href="'+plugin.url+data.result[0]+'">'+plugin.name+'</a></li>'
+									});      
+                                 var_html = var_html+ '</li>'+
+                                '</ul>'+
+                              '</div>';
 						oTable.fnAddData( [
 							server_ip_domain,
-							'<button type="button" class="btn btn-default select_audit" data-id="'+data.result[0].id+'">Details</button><button type="button" class="btn btn-danger delete_audit" data-id="'+data.result[0].id+'">eliminar</button>'] ); 
+							
+							var_html+' <button type="button" class="btn btn-danger delete_device" data-id="'+data.result[0]+'">eliminar</button>'] ); 
 						$("#add-new-device-modal").modal('hide')
 
 					}else{
